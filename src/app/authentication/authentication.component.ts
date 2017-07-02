@@ -1,0 +1,43 @@
+import { Component, OnInit } from '@angular/core';
+
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+ 
+import { AuthenticationService } from './authentication.service';
+
+@Component({
+  selector: 'app-authentication',
+  templateUrl: './authentication.component.html'
+})
+export class AuthenticationComponent {
+	
+        returnUrl: string;
+	loginForm: FormGroup;
+	error: string = '';
+ 
+	constructor(
+		private formBuilder: FormBuilder, 
+		private authenticationService: AuthenticationService, 
+		private router: Router,
+                private route: ActivatedRoute
+	) {
+		this.loginForm = formBuilder.group({
+			'username': ['gary', Validators.required],
+			'password': ['pass', Validators.required]
+		});
+                this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+	}
+ 
+	onSubmit() {
+		this.authenticationService
+			.authenticate(this.loginForm.value)
+			.subscribe(
+	            data => { 
+	            	localStorage.setItem('token', data.token);
+			this.router.navigate([this.returnUrl]);	
+	            },
+	            error => this.error = error.message
+	        );
+	}
+
+}

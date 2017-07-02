@@ -1,0 +1,37 @@
+<button type="button" class="btn btn-success" 
+    (click)="gotoCreate()">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    Effectuer une réservation 
+</button>
+
+
+<div class="col-md-12">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Date Début résa</th>
+                <th>Date Fin résa</th>
+                <th>Marque Vehicule</th>
+                <th>Immatriculation Vehicule</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr *ngFor="let reservation of listReservation">
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.nom }}</td>
+                <td>{{ reservation.prenom }}</td>
+                <td>{{ reservation.date_debut | amDateFormat: 'YYYY-MM-DD HH:mm' }}</td>
+                <td>{{ reservation.date_fin | amDateFormat: 'YYYY-MM-DD HH:mm' }}</td>
+                <td>{{ reservation.vehicule.marque }}</td>
+                <td>{{ reservation.vehicule.immatriculation }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+</div>

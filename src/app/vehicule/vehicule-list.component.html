@@ -1,0 +1,29 @@
+
+
+<div class="col-md-12">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Immatriculation</th>
+                <th>Ville</th>
+                <th>Marque</th>
+                <th>Responsable</th>
+                <th>Kilométrage</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr *ngFor="let vehicule of listVehicule">
+                <td>{{ vehicule.immatriculation }}</td>
+                <td>{{ vehicule.ville }}</td>
+                <td>{{ vehicule.marque }}</td>
+                <td>{{ vehicule.nom_responsable }}</td>
+                <td>{{ vehicule.kilometrage| number:'1.2-2' }} km</td>
+                
+            </tr>
+            
+        </tbody>
+    </table>
+
+</div>
