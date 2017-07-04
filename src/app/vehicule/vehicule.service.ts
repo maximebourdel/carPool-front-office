@@ -1,5 +1,6 @@
 import { Injectable }                       from '@angular/core';
-import { Http, Response }                   from '@angular/http';
+import { Response }                   from '@angular/http';
+import { AuthHttp }     from 'angular2-jwt';
 
 import { Vehicule }                         from './vehicule';
 import { Observable }                       from 'rxjs/Observable';
@@ -11,13 +12,13 @@ export class VehiculeService {
  
     baseUrl: string = 'http://' + environment.API_PATH;
            
-    constructor (private http: Http) {}
+    constructor (private authHttp: AuthHttp) {}
  
     getListVehicule (): Observable<Vehicule[]> {
         
         let url = this.baseUrl + 'vehicule/all';
 
-        return this.http.get(url)
+        return this.authHttp.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
     }
@@ -26,7 +27,7 @@ export class VehiculeService {
         
         let url = this.baseUrl + 'industries/' + term;
 
-        return this.http.get(url)
+        return this.authHttp.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
     }

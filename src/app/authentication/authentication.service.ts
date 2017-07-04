@@ -10,7 +10,7 @@ export class AuthenticationService {
     constructor(private http: Http) {}
 
     authenticate(user: any) {
-  	let url 	= 'http://'+ environment.API_PATH +'/api/login_check';
+  	let url 	= 'http://'+ environment.API_PATH +'login_check';
         let body 	= new URLSearchParams();
         body.append('username', user.username);
         body.append('password', user.password);

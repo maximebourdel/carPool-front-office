@@ -1,4 +1,4 @@
-import { Component, OnInit }    from '@angular/core';
+import { Component, OnInit, OnDestroy }    from '@angular/core';
 
 import { Router }               from '@angular/router';
  
@@ -14,7 +14,7 @@ import { Observable }           from 'rxjs/Observable';
     providers: [ VehiculeService ],
     styles: ['.error {color:red;}']
 })
-export class VehiculeListComponent implements OnInit {
+export class VehiculeListComponent implements OnInit, OnDestroy {
     
     errorMessage: string;
     listVehicule: Vehicule[];
@@ -26,8 +26,17 @@ export class VehiculeListComponent implements OnInit {
         private router: Router,
     ) {}
 
-    ngOnInit() { this.getListVehicule(); }
+    ngOnInit() { 
+        //Met la navbar nav-vehicule en active
+        document.getElementById('nav-vehicule').setAttribute('class','active');
+        this.getListVehicule(); 
+    }
 
+    ngOnDestroy() { 
+        //Met la navbar nav-vehicule en inactive
+        document.getElementById('nav-vehicule').removeAttribute('class');
+    }
+    
     search (term: string) {
         this.listSearchVehicule = this.vehiculeService.getSearchVehicule(term);
     }

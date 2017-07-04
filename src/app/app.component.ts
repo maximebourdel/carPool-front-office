@@ -9,14 +9,16 @@ import { AuthenticationService } from './authentication/authentication.service';
 })
 export class AppComponent {
  
-	constructor(private authenticationService: AuthenticationService, private router: Router) {}
+    imageLogo: string = '/assets/logo.png';
+
+    constructor(private authenticationService: AuthenticationService, private router: Router) {}
  
-	hasAuthToken() {
-	    return localStorage.getItem('token') !== null;
-	}
+    hasAuthToken() {
+        return localStorage.getItem('token') !== null;
+    }
  
-	logout() {
-	     this.authenticationService.logout();
-    	     this.router.navigate(['']);  
-	}
+    logout() {
+        this.authenticationService.logout();
+        this.router.navigate(['']);  
+    }
 }

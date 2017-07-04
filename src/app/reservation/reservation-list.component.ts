@@ -26,7 +26,16 @@ export class ReservationListComponent implements OnInit {
         private router: Router,
     ) {}
 
-    ngOnInit() { this.getListReservation(); }
+    ngOnInit() {
+        //Met la navbar nav-liste-reservation en active
+        document.getElementById('nav-liste-reservation').setAttribute('class','active');
+        this.getListReservation(); 
+    }
+    
+    ngOnDestroy() {
+        //Met la navbar nav-liste-reservation en inactive
+        document.getElementById('nav-liste-reservation').removeAttribute('class');
+    }
 
     search (term: string) {
         this.listSearchReservation = this.reservationService.getSearchReservation(term);

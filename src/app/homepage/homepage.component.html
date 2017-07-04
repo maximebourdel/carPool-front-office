@@ -1,1 +1,63 @@
-<h1>Home</h1>
+<h1>Bienvenue sur l'application Carpool</h1>
+
+<h3>Sélectionnez une action à effectuer :</h3> 
+
+<div class="row">
+    <div class="container-fluid">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        
+         
+        <div class="col-md-4">        
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a [routerLink]="['vehicule']">
+                        <div class="row">
+                            <div class="col-xs-4">     
+                                <i class="fa fa-car fa-5x"> </i> 
+                            </div>
+                            <br />
+                            <div class="col-xs-8">     
+                                <h4>Liste des véhicules</h4>
+                            </div> 
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">        
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a [routerLink]="['reservation']">
+                        <div class="row">
+                            <div class="col-xs-4">     
+                                <i class="fa fa-calendar fa-5x"></i>
+                            </div>
+                            <br />
+                            <div class="col-xs-8">     
+                                <h4>Liste des réservations</h4>
+                            </div> 
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">        
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <a [routerLink]="['reservation/new']">
+                        <div class="row">
+                            <div class="col-xs-4">     
+                                <i class="fa fa-calendar-plus-o fa-5x"></i>
+                            </div>
+                            <br />
+                            <div class="col-xs-8">     
+                                <h4>Nouvelle Réservation</h4>
+                            </div> 
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+         
+    </div><!-- /.container-fluid -->
+</div>

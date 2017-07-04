@@ -2,26 +2,59 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" [routerLink]="['']">Car Pool</a>
+      <a class="navbar-brand" [routerLink]="['']">
+          <img [src]="imageLogo" class="img-responsive" style='max-width: 15%'>
+      </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li><a [routerLink]="['']">Home</a></li>
-            <li><a [routerLink]="['vehicule']">Liste Vehicule</a></li>
-            <li><a [routerLink]="['reservation']">Reservation</a></li>
+    <div class="collapse navbar-collapse"  id="bs-navbar-collapse-1">
+        <ul class="nav navbar-nav" id ="navbar-nav">
+            <li id="nav-home">
+                <a [routerLink]="['']">
+                    <i class="fa fa-home" aria-hidden="true"></i> Home
+                </a>
+            </li>
+            <li id="nav-vehicule">
+                <a [routerLink]="['vehicule']">
+                    <i class="fa fa-car" aria-hidden="true"></i> Liste véhicules 
+                </a>
+            </li>
+            <li id="nav-liste-reservation">
+                <a [routerLink]="['reservation']">
+                    <i class="fa fa-calendar" aria-hidden="true"></i> Liste réservations
+                </a>
+            </li>
+            <li id="nav-reservation-create">
+                <a [routerLink]="['reservation/new']">
+                    <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Nouvelle réservation
+                </a>
+            </li>
         </ul>
-            <ul class="nav navbar-nav pull-right">
-                <!--<li *ngIf="!hasAuthToken()"><a [routerLink]="['login']">Login</a></li>
-                <li *ngIf="hasAuthToken()"><a (click)="logout()">Logout</a></li>-->
-            </ul>
+        
+        
+        <ul class="nav navbar-nav pull-right">
+
+            <li *ngIf="!hasAuthToken()">
+                <a [routerLink]="['login']">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
+                    Admin/<b>Login</b>
+                </a>
+            </li>
+            <li *ngIf="hasAuthToken()">
+                <a (click)="logout()">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
+                    Admin/<b>Logout</b>
+                </a>
+            </li>
+        </ul>
+        
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

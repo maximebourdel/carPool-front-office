@@ -1,10 +1,11 @@
-import { Injectable }                       from '@angular/core';
-import { Http, Response }                   from '@angular/http';
+import { Injectable }   from '@angular/core';
+import { Response }     from '@angular/http';
+import { AuthHttp }     from 'angular2-jwt';
 
-import { Reservation }                      from './reservation';
-import { Observable }                       from 'rxjs/Observable';
+import { Reservation }  from './reservation';
+import { Observable }   from 'rxjs/Observable';
 
-import { environment }                      from '../../environments/environment';
+import { environment }  from '../../environments/environment';
 
 
 @Injectable()
@@ -12,13 +13,13 @@ export class ReservationService {
  
     baseUrl: string = 'http://' + environment.API_PATH;
            
-    constructor (private http: Http) {}
+    constructor (private authHttp: AuthHttp) {}
  
     getListReservation (): Observable<Reservation[]> {
         
         let url = this.baseUrl + 'reservation/all';
 
-        return this.http.get(url)
+        return this.authHttp.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
     }
@@ -27,7 +28,7 @@ export class ReservationService {
         
         let url = this.baseUrl + 'reservation/sumdaybyday';
 
-        return this.http.get(url)
+        return this.authHttp.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
     }    
@@ -36,7 +37,7 @@ export class ReservationService {
         
         let url = this.baseUrl + 'reservation/requete';
 
-        return this.http.get(url)
+        return this.authHttp.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
     } 
@@ -45,7 +46,7 @@ export class ReservationService {
         
         let url = this.baseUrl + 'reservations/' + term;
 
-        return this.http.get(url)
+        return this.authHttp.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
     }
@@ -54,7 +55,7 @@ export class ReservationService {
         
         let url = this.baseUrl + 'reservations';
         
-        return this.http
+        return this.authHttp
             .post(url, JSON.stringify( reservation ) )
             .map( res => this.extractData(res) )
         ;

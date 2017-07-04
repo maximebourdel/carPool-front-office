@@ -34,10 +34,6 @@ export class ReservationCreateComponent implements OnInit {
         private router: Router,
     ) {} 
     
-            
-   
-    
-
     // Set custom color for the calendar heatmap
     color = '#cd2327';
 
@@ -46,11 +42,18 @@ export class ReservationCreateComponent implements OnInit {
 
     
     ngOnInit(): void { 
-
+        //Met la navbar reservation-create en active
+        document.getElementById('nav-reservation-create').setAttribute('class','active');
         this.getListVehicule();
         this.getRequete();
+    }
+
+    ngOnDestroy(): void { 
+        //Met la navbar reservation-create en inactive
+        document.getElementById('nav-reservation-create').removeAttribute('class');
     } 
-       
+
+           
     getListVehicule() {
         
         this.vehiculeService.getListVehicule()
@@ -114,7 +117,6 @@ export class ReservationCreateComponent implements OnInit {
             
             
     }
-    
     
     addReservation(): void { 
         if (!this.reservation) { return; }
