@@ -15,11 +15,11 @@ const routes: Routes = [
 	{ path: 'login', component: AuthenticationComponent },
 
 	//Pour les véhicules
-	{ path: 'vehicule', component: VehiculeListComponent },
+	{ path: 'vehicule', component: VehiculeListComponent, canActivate: [AuthGuard] },
 	
         //Pour les réservations
-	{ path: 'reservation', component: ReservationListComponent }, 
-        { path: 'reservation/new', component: ReservationCreateComponent },   
+	{ path: 'reservation', component: ReservationListComponent, canActivate: [AuthGuard] }, 
+        { path: 'reservation/new', component: ReservationCreateComponent, canActivate: [AuthGuard] },   
 
 	{ path: '**', redirectTo: '' }
 ];
