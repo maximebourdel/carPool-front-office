@@ -22,8 +22,8 @@ export class AuthenticationComponent {
                 private route: ActivatedRoute
 	) {
 		this.loginForm = formBuilder.group({
-			'username': ['gary', Validators.required],
-			'password': ['pass', Validators.required]
+			'username': ['', Validators.required],
+			'password': ['', Validators.required]
 		});
                 this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 	}
@@ -36,7 +36,7 @@ export class AuthenticationComponent {
 	            	localStorage.setItem('token', data.token);
 			this.router.navigate([this.returnUrl]);	
 	            },
-	            error => this.error = error.message
+	            () => this.error = 'Mauvais login ou mot de passe'
 	        );
 	}
 

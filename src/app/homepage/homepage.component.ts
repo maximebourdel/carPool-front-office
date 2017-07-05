@@ -8,16 +8,14 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         document.getElementById('nav-home').setAttribute('class','active');
-
-    }    
+    }
        
     ngOnDestroy(): void {
         document.getElementById('nav-home').removeAttribute('class');
     }
     
-
-    
-    
-    
+    hasAuthToken() {
+        return localStorage.getItem('token') !== null;
+    }
     
 }

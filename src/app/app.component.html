@@ -36,6 +36,11 @@
                     <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Nouvelle réservation
                 </a>
             </li>
+            <li id="nav-reservation-validate" *ngIf="hasAuthToken()">
+                <a [routerLink]="['reservation/validate']">
+                    <i class="fa fa-key" aria-hidden="true"></i> Administration
+                </a>
+            </li>
         </ul>
         
         
@@ -53,6 +58,7 @@
                     Admin/<b>Logout</b>
                 </a>
             </li>
+            
         </ul>
         
     </div><!-- /.navbar-collapse -->
@@ -63,4 +69,5 @@
 <div class="container">
     <router-outlet></router-outlet>
 </div>
+<br />
 	

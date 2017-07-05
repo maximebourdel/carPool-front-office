@@ -19,6 +19,8 @@ import { VehiculeService }                  from './vehicule/vehicule.service';
 
 import { ReservationListComponent }         from './reservation/reservation-list.component';
 import { ReservationCreateComponent }       from './reservation/reservation-create.component';
+import { ReservationValidateComponent }     from './reservation/reservation-validate.component';
+
 import { ReservationService }               from './reservation/reservation.service';
 
 import { ChartModule }                      from 'angular2-highcharts';
@@ -48,6 +50,7 @@ export function highchartsFactory() {
             VehiculeListComponent,
             ReservationListComponent,
             ReservationCreateComponent,
+            ReservationValidateComponent,
             DatePicker,
             CalendarHeatmap
   	],

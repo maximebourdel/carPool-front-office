@@ -1,5 +1,5 @@
 import { Injectable }   from '@angular/core';
-import { Response }     from '@angular/http';
+import { Response, Http }     from '@angular/http';
 import { AuthHttp }     from 'angular2-jwt';
 
 import { Reservation }  from './reservation';
@@ -13,13 +13,14 @@ export class ReservationService {
  
     baseUrl: string = 'http://' + environment.API_PATH;
            
-    constructor (private authHttp: AuthHttp) {}
+    constructor (private authHttp: AuthHttp
+        , private http: Http) {}
  
     getListReservation (): Observable<Reservation[]> {
         
         let url = this.baseUrl + 'reservation/all';
 
-        return this.authHttp.get(url)
+        return this.http.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
     }
@@ -28,28 +29,29 @@ export class ReservationService {
         
         let url = this.baseUrl + 'reservation/sumdaybyday';
 
-        return this.authHttp.get(url)
+        return this.http.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
-    }    
+    }   
 
     getRequete (): Observable<any[]> {
         
         let url = this.baseUrl + 'reservation/requete';
 
-        return this.authHttp.get(url)
+        return this.http.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
     } 
         
-    getSearchReservation (term: string): Observable<Reservation[]> {
+    getCreneauxByAnneeMois(datesJson: any): Observable<any[]> {
         
-        let url = this.baseUrl + 'reservations/' + term;
-
-        return this.authHttp.get(url)
-                   .map( this.extractData )
-                   .catch(this.handleError);         
-    }
+        let url = this.baseUrl + 'reservations/creneauxbyanneemois';
+        
+        return this.http
+            .post(url, JSON.stringify( datesJson ) )
+            .map( res => this.extractData(res) )
+        ;
+    } 
 
     createReservation(reservation: Reservation): Observable<Reservation> {
         

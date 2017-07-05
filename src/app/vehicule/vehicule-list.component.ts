@@ -11,8 +11,7 @@ import { Observable }           from 'rxjs/Observable';
     moduleId: module.id,
     selector: 'vehicule-list',
     templateUrl: 'vehicule-list.component.html',
-    providers: [ VehiculeService ],
-    styles: ['.error {color:red;}']
+    providers: [ VehiculeService ]
 })
 export class VehiculeListComponent implements OnInit, OnDestroy {
     

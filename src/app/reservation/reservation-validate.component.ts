@@ -8,19 +8,16 @@ import { ReservationService }   from './reservation.service';
 import { Vehicule }             from '../vehicule/vehicule';
 import { VehiculeService }      from '../vehicule/vehicule.service';
 
-
 @Component({
-    selector: 'reservation-create',
+    selector: 'reservation-validate',
     providers: [ReservationService, VehiculeService],
-    templateUrl: 'reservation-create.component.html'
+    templateUrl: 'reservation-validate.component.html'
 })
-export class ReservationCreateComponent implements OnInit {
+export class ReservationValidateComponent implements OnInit {
 
     
     errorMessage: string;
     reservation: Reservation = new Reservation ();
-    listData2: any = new Array();
-    listData: any = new Array();
     listVehicule: Vehicule[];
 
 
@@ -32,22 +29,16 @@ export class ReservationCreateComponent implements OnInit {
         private router: Router,
     ) {} 
     
-    // Set custom color for the calendar heatmap
-    color = '#cd2327';
-
-    // Set overview type (choices are year, month and day)
-    overview = 'year';
-
     
     ngOnInit(): void { 
         //Met la navbar reservation-create en active
-        document.getElementById('nav-reservation-create').setAttribute('class','active');
+        document.getElementById('nav-reservation-validate').setAttribute('class','active');
         this.getListVehicule();
     }
 
     ngOnDestroy(): void { 
         //Met la navbar reservation-create en inactive
-        document.getElementById('nav-reservation-create').removeAttribute('class');
+        document.getElementById('nav-reservation-validate').removeAttribute('class');
     } 
 
            
@@ -59,7 +50,7 @@ export class ReservationCreateComponent implements OnInit {
                 error =>  this.errorMessage = <any>error,
             );
     }
-
+    
     addReservation(): void { 
         if (!this.reservation) { return; }
         this.reservationService
