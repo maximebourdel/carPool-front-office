@@ -9,3 +9,14 @@
 chart {
   display: block;
 }
+
+table#tableReservation > tbody > tr > td
+,table#tableReservation > tbody > tr > th
+,table#tableReservation > tfoot > tr > td
+,table#tableReservation > tfoot > tr > th
+,table#tableReservation > thead > tr > td
+,table#tableReservation > thead > tr > th {
+    border-right: 1px solid #ddd;
+    padding:1px;
+    text-align: center;
+}

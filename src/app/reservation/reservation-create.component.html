@@ -18,7 +18,6 @@
 
     <form (ngSubmit)="addReservation()" #reservationForm="ngForm">
 
-
         <div class="form-group col-md-6">
             <label for="dateDebut">Date début réservation</label>
             <my-datepicker #dateDebut 
@@ -28,7 +27,6 @@
                     [ngModel]="reservation.date_debut | date:'yyyy-MM-dd'" 
                     (ngModelChange)="reservation.date_debut = dateDebut.value"
             >
-                    
             </my-datepicker>
         </div>        
 

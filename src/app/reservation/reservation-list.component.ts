@@ -1,13 +1,13 @@
 import { Component, OnInit }        from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup }   from '@angular/forms';
 
-import { Router }               from '@angular/router';
+import { Router }                   from '@angular/router';
  
-import { Reservation }          from './reservation';
-import { ReservationService }   from './reservation.service';
+import { Reservation }              from './reservation';
+import { ReservationService }       from './reservation.service';
 
-import { Vehicule }             from '../vehicule/vehicule';
-import { VehiculeService }      from '../vehicule/vehicule.service';
+import { Vehicule }                 from '../vehicule/vehicule';
+import { VehiculeService }          from '../vehicule/vehicule.service';
 
 @Component({
     selector: 'reservation-list',
@@ -40,20 +40,22 @@ export class ReservationListComponent implements OnInit {
           mois: '6'
         });
     }
+    
     color($value:number){
         if ($value == 0){
             return "lightgreen";
         } else if ($value == 1){
             return "salmon";
         }
-        
     }
+    
     ngOnInit() {
         //Met la navbar nav-liste-reservation en active
         document.getElementById('nav-liste-reservation').setAttribute('class','active');
         this.createForm();
         this.getListVehicule();
         this.getListReservation(); 
+        
     }
     
     ngOnDestroy() {
@@ -77,22 +79,23 @@ export class ReservationListComponent implements OnInit {
             .getCreneauxByAnneeMois(this.datesForm.value)
             .subscribe(
                 (apiListCreneauxByAnneeMois) => {
-                    
+                    debugger;
                     //initialisations
                     this.listCreneauxByAnneeMois = new Array();
                     this.listJours = new Array();
                     
                     let cpt: number = 0;
                     let list: any[] = new Array();
-                    let apiListCreneauxByAnneeMoisLenght = apiListCreneauxByAnneeMois.length
                     
+                    let apiListCreneauxByAnneeMoisLenght = apiListCreneauxByAnneeMois.length
                     let firstImmatriculation = apiListCreneauxByAnneeMois[0]['immatriculation'];
 
                     let immatriculationPrec = firstImmatriculation;
 
                     list.push(immatriculationPrec);
                     for (let data of apiListCreneauxByAnneeMois ){
-                        
+                        //on incrémente le compteur 
+                        cpt++;
                         //changement de vehicule
                         if(immatriculationPrec != data.immatriculation ) {
                             immatriculationPrec = data.immatriculation;
@@ -101,17 +104,17 @@ export class ReservationListComponent implements OnInit {
                             list.push(data.immatriculation);
                             
                         //dernier element de la liste
-                        } else if (apiListCreneauxByAnneeMoisLenght == cpt-1) {
-                            this.listCreneauxByAnneeMois.push(list);
                         } 
                         //dans tous les cas on insere le boolean
                         list.push(data.is_reserve);
                         
+                        if (apiListCreneauxByAnneeMoisLenght == cpt) {
+                            this.listCreneauxByAnneeMois.push(list);
+                        }
                         if(data.immatriculation == firstImmatriculation ){
                             this.listJours.push(data.jour);
                         }
-                        //on incrémente le compteur 
-                        cpt++;
+                        
                         
                         
                         

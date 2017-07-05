@@ -57,7 +57,7 @@ export class ReservationService {
         
         let url = this.baseUrl + 'reservations';
         
-        return this.authHttp
+        return this.http
             .post(url, JSON.stringify( reservation ) )
             .map( res => this.extractData(res) )
         ;
