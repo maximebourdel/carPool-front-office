@@ -79,7 +79,7 @@ export class ReservationListComponent implements OnInit {
             .getCreneauxByAnneeMois(this.datesForm.value)
             .subscribe(
                 (apiListCreneauxByAnneeMois) => {
-                    debugger;
+                    
                     //initialisations
                     this.listCreneauxByAnneeMois = new Array();
                     this.listJours = new Array();
@@ -87,7 +87,10 @@ export class ReservationListComponent implements OnInit {
                     let cpt: number = 0;
                     let list: any[] = new Array();
                     
+                    //récupération des immatriculations dans deux variables
+                    // sert pour le cpt et detecter la derniere ligne
                     let apiListCreneauxByAnneeMoisLenght = apiListCreneauxByAnneeMois.length
+                    //sert a detecter le changement d'immatriculation
                     let firstImmatriculation = apiListCreneauxByAnneeMois[0]['immatriculation'];
 
                     let immatriculationPrec = firstImmatriculation;

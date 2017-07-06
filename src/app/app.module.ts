@@ -26,7 +26,6 @@ import { ReservationService }               from './reservation/reservation.serv
 import { ChartModule }                      from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 
-import { CalendarHeatmap } from 'angular2-calendar-heatmap';
 import { MomentModule } from 'angular2-moment';
 
 declare var require : any;
@@ -52,7 +51,6 @@ export function highchartsFactory() {
             ReservationCreateComponent,
             ReservationValidateComponent,
             DatePicker,
-            CalendarHeatmap
   	],
 	imports: [
 	    BrowserModule,

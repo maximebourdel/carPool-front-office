@@ -31,12 +31,6 @@ export class ReservationCreateComponent implements OnInit {
         private vehiculeService: VehiculeService,
         private router: Router,
     ) {} 
-    
-    // Set custom color for the calendar heatmap
-    color = '#cd2327';
-
-    // Set overview type (choices are year, month and day)
-    overview = 'year';
 
     
     ngOnInit(): void { 

@@ -8,7 +8,6 @@ import { VehiculeService }      from './vehicule.service';
 import { Observable }           from 'rxjs/Observable';
 
 @Component({
-    moduleId: module.id,
     selector: 'vehicule-list',
     templateUrl: 'vehicule-list.component.html',
     providers: [ VehiculeService ]
