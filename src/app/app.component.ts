@@ -9,7 +9,7 @@ import { AuthenticationService } from './authentication/authentication.service';
 })
 export class AppComponent {
  
-    imageLogo: string = '/assets/logo.png';
+    imageLogo: string = './assets/logo.png';
 
     constructor(private authenticationService: AuthenticationService, private router: Router) {}
  
