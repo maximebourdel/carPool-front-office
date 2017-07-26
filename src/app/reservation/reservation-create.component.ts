@@ -22,7 +22,7 @@ export class ReservationCreateComponent implements OnInit {
     listData2: any = new Array();
     listData: any = new Array();
     listVehicule: Vehicule[];
-
+    
 
     data:any;
 
@@ -37,6 +37,8 @@ export class ReservationCreateComponent implements OnInit {
         //Met la navbar reservation-create en active
         document.getElementById('nav-reservation-create').setAttribute('class','active');
         this.getListVehicule();
+        this.reservation.prenom = localStorage.getItem('prenom');
+        this.reservation.nom = localStorage.getItem('nom');
     }
 
     ngOnDestroy(): void { 

@@ -11,33 +11,35 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AuthenticationComponent {
 	
-        returnUrl: string;
-	loginForm: FormGroup;
-	error: string = '';
+    returnUrl: string;
+    loginForm: FormGroup;
+    error: string = '';
  
-	constructor(
-		private formBuilder: FormBuilder, 
-		private authenticationService: AuthenticationService, 
-		private router: Router,
-                private route: ActivatedRoute
-	) {
-		this.loginForm = formBuilder.group({
-			'username': ['', Validators.required],
-			'password': ['', Validators.required]
-		});
-                this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-	}
+    constructor(
+        private formBuilder: FormBuilder, 
+        private authenticationService: AuthenticationService, 
+        private router: Router,
+        private route: ActivatedRoute
+    ) {
+        this.loginForm = formBuilder.group({
+                'username': ['', Validators.required],
+                'password': ['', Validators.required]
+        });
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
  
 	onSubmit() {
-		this.authenticationService
-			.authenticate(this.loginForm.value)
-			.subscribe(
-	            data => { 
-	            	localStorage.setItem('token', data.token);
-			this.router.navigate([this.returnUrl]);	
-	            },
-	            () => this.error = 'Mauvais login ou mot de passe'
-	        );
+            this.authenticationService
+                    .authenticate(this.loginForm.value)
+                    .subscribe(
+                data => { 
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('nom', data.user_values.nom);
+                    localStorage.setItem('prenom', data.user_values.prenom);
+                    this.router.navigate([this.returnUrl]);
+                },
+                () => this.error = 'Mauvais login ou mot de passe'
+            );
 	}
 
 }

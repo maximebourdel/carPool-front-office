@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" [routerLink]="['']">
-          <img [src]="imageLogo" class="img-responsive" style='max-width: 15%'>
+          <img [src]="imageLogo" class="img-responsive" style='max-width: 20%'>
       </a>
     </div>
 
@@ -36,11 +36,11 @@
                     <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Nouvelle réservation
                 </a>
             </li>
-            <li id="nav-reservation-validate" *ngIf="hasAuthToken()">
+            <!--<li id="nav-reservation-validate" >
                 <a [routerLink]="['reservation/validate']">
                     <i class="fa fa-key" aria-hidden="true"></i> Administration
                 </a>
-            </li>
+            </li>-->
         </ul>
         
         
@@ -49,13 +49,13 @@
             <li *ngIf="!hasAuthToken()">
                 <a [routerLink]="['login']">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
-                    Admin/<b>Login</b>
+                    <b>Login</b>
                 </a>
             </li>
             <li *ngIf="hasAuthToken()">
                 <a (click)="logout()">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
-                    Admin/<b>Logout</b>
+                    <b>Logout</b>
                 </a>
             </li>
             

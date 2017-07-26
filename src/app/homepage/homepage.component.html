@@ -3,9 +3,7 @@
 <h3>Sélectionnez une action à effectuer :</h3> 
 
 <div class="row">
-    <div class="container-fluid">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        
+    <div class="container-fluid">        
          
         <div class="col-md-4">        
             <div class="panel panel-default">
@@ -24,6 +22,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-md-4">        
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -41,6 +40,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-md-4">        
             <div class="panel panel-success">
                 <div class="panel-heading">
@@ -58,7 +58,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4" *ngIf="hasAuthToken()">        
+        
+        <!--<div class="col-md-4" *ngIf="hasAuthToken()">        
             <div class="panel panel-danger">
                 <div class="panel-heading">
                     <a [routerLink]="['reservation/validate']">
@@ -74,7 +75,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div>-->
          
     </div><!-- /.container-fluid -->
 </div>

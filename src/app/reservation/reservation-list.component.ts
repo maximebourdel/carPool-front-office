@@ -19,6 +19,9 @@ export class ReservationListComponent implements OnInit {
     errorMessage: string;
     listReservation: Reservation[];
     listVehicule: Vehicule[];
+    dateToday= new Date();
+    mm = this.dateToday.getUTCMonth()+1; //Janvier = 0!
+    yyyy = this.dateToday.getFullYear();
     
     
     //variables pour listCreneauxByAnneeMois
@@ -36,8 +39,8 @@ export class ReservationListComponent implements OnInit {
 
     createForm() {
         this.datesForm = this.formBuilder.group({
-          annee: '2017',
-          mois: '6'
+          annee: this.yyyy,
+          mois: this.mm
         });
     }
     

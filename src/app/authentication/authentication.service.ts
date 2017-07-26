@@ -7,8 +7,10 @@ import { environment }                                              from '../../
 @Injectable()
 export class AuthenticationService {
 
-    constructor(private http: Http) {}
+    returnCode: number;
 
+    constructor(private http: Http) {}
+    
     authenticate(user: any) {
   	let url 	= 'http://'+ environment.API_PATH +'login_check';
         let body 	= new URLSearchParams();
@@ -18,8 +20,9 @@ export class AuthenticationService {
         let options = new RequestOptions({headers: headers});
 
   	return this.http
-  	        .post(url, body.toString(), options)
-  		.map((data: Response) => data.json());
+                    .post(url, body.toString(), options)
+                    .map((data: Response) => data.json())
+                    ;
     }
 
     logout() {
