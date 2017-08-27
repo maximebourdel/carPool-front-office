@@ -6,27 +6,6 @@
 
 <reservation-creneaux>Chargement des créneaux...</reservation-creneaux>
 
-<div class="col-xs-12 col-md-12">
-    
-    <table class="table" *ngIf="listCreneauxByAnneeMois" id="tableReservation">
-        <thead>
-            <tr>
-                <th>Vehicule</th>
-                <th *ngFor="let jour of listJours">{{jour}}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let creneauxByAnneeMois of listCreneauxByAnneeMois">
-                <td *ngFor="let elem of creneauxByAnneeMois" 
-                    [style.background]="color(elem)"
-                    
-                >{{elem == 0 || elem == 1 ? '' : elem}}</td >
-            </tr>
-        </tbody>
-    </table>
-
-</div>
-
 
 <div class="col-xs-12 col-md-12">
     <h3>Liste complète des réservations</h3>
