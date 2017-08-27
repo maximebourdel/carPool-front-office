@@ -34,6 +34,7 @@ export class AuthenticationComponent {
                     .subscribe(
                 data => { 
                     localStorage.setItem('token', data.token);
+                    localStorage.setItem('email', data.user_values.email);
                     localStorage.setItem('nom', data.user_values.nom);
                     localStorage.setItem('prenom', data.user_values.prenom);
                     this.router.navigate([this.returnUrl]);

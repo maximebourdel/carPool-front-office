@@ -1,0 +1,60 @@
+<div class="col-xs-12 col-md-12">
+
+    <h3>Créneaux par véhicules</h3>
+    <form [formGroup]="datesForm" (ngSubmit)="getCreneauxByAnneeMois()" >    
+        
+        <h4>Sélectionnez un mois et une année pour afficher les disponibilités des véhicules pour ce mois.</h4>
+
+        <div class="col-xs-5 col-md-3">
+            <h4> Année 
+                <select formControlName="annee">
+                    <option [value]="yyyy" >{{yyyy}}</option>
+                </select>
+            </h4>
+        </div>
+        <div class="col-xs-7" >
+            <h4> Mois 
+                <select  formControlName="mois">
+                    <option [value]="1">Janvier</option>
+                    <option [value]="2">Fevrier</option>
+                    <option [value]="3">Mars</option>
+                    <option [value]="4">Avril</option>
+                    <option [value]="5">Mai</option>
+                    <option [value]="6">Juin</option>
+                    <option [value]="7">Juillet</option>
+                    <option [value]="8">Août</option>
+                    <option [value]="9">Septembre</option>
+                    <option [value]="10">Octobre</option>
+                    <option [value]="11">Novembre</option>
+                    <option [value]="12">Décembre</option>
+                </select>
+            </h4>
+        </div>
+        
+        <div class="col-xs-12" >
+            <button type="submit" class="btn btn-success">Valider</button>
+        </div>
+        
+    </form>
+    
+</div>
+<div class="col-xs-12 col-md-12">
+    
+    <table class="table" *ngIf="listCreneauxByAnneeMois" id="tableReservation">
+        <thead>
+            <tr>
+                <th>Vehicule</th>
+                <th *ngFor="let jour of listJours">{{jour}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let creneauxByAnneeMois of listCreneauxByAnneeMois">
+                <td *ngFor="let elem of creneauxByAnneeMois" 
+                    [style.background]="color(elem)"
+                    
+                >{{elem == 0 || elem == 1 ? '' : elem}}</td >
+            </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -12,8 +12,8 @@ export class AuthenticationService {
     constructor(private http: Http) {}
     
     authenticate(user: any) {
-  	let url 	= 'http://'+ environment.API_PATH +'login_check';
-        let body 	= new URLSearchParams();
+  	let url     = 'http://'+ environment.API_PATH +'login_check';
+        let body    = new URLSearchParams();
         body.append('username', user.username);
         body.append('password', user.password);
   	let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
@@ -27,6 +27,9 @@ export class AuthenticationService {
 
     logout() {
         localStorage.removeItem('token');
+        localStorage.removeItem('email');
+        localStorage.removeItem('nom');
+        localStorage.removeItem('prenom');
     }
 
     loggedIn() {

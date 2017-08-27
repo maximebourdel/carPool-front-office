@@ -26,9 +26,9 @@
                     <i class="fa fa-car" aria-hidden="true"></i> Liste véhicules 
                 </a>
             </li>
-            <li id="nav-liste-reservation">
-                <a [routerLink]="['reservation']">
-                    <i class="fa fa-calendar" aria-hidden="true"></i> Liste réservations
+            <li id="nav-my-liste-reservation">
+                <a [routerLink]="['reservation/myList']">
+                    <i class="fa fa-calendar" aria-hidden="true"></i> Mes réservations
                 </a>
             </li>
             <li id="nav-reservation-create">
@@ -43,9 +43,12 @@
             </li>-->
         </ul>
         
-        
         <ul class="nav navbar-nav pull-right">
 
+            <li *ngIf="hasAuthToken()">
+                <a>{{ prenomUtilisateur }} {{ nomUtilisateur }}</a>
+            </li>
+            
             <li *ngIf="!hasAuthToken()">
                 <a [routerLink]="['login']">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
@@ -67,6 +70,7 @@
 
 
 <div class="container">
+    <flash-messages></flash-messages>
     <router-outlet></router-outlet>
 </div>
 <br />

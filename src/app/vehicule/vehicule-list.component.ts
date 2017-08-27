@@ -33,10 +33,6 @@ export class VehiculeListComponent implements OnInit, OnDestroy {
         //Met la navbar nav-vehicule en inactive
         document.getElementById('nav-vehicule').removeAttribute('class');
     }
-    
-    search (term: string) {
-        this.listSearchVehicule = this.vehiculeService.getSearchVehicule(term);
-    }
 
     getListVehicule() {
         

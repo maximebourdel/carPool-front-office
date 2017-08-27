@@ -7,12 +7,14 @@
     </button>
 </div>
 
-<!--<calendar-heatmap
-  [data]="data"
-  [color]="color"
-  [overview]="overview">
-</calendar-heatmap>-->
-    
+<br />
+
+<h2>Etape 1 : Vérifiez les disponibilités de votre créneau</h2>
+<reservation-creneaux>Chargement des créneaux...</reservation-creneaux>
+
+<br />
+
+<h2>Etape 2 : Effectuez votre réservation</h2>
 <div class="col-md-6">
     <h1>Nouvelle Réservation</h1>
 
@@ -59,44 +61,18 @@
             </select>
         </div>
 
-        <!--<div class="form-group col-md-12">
-            <label for="nom">Votre nom</label>
-            <input type="text" class="form-control" id="nom" 
-                required
-                [(ngModel)]="reservation.nom" name="nom"
-                #nom="ngModel"
-                disabled
-            >
-            <div [hidden]="nom.valid || nom.pristine"
-                class="alert alert-danger">
-                Le nom est obligatoire
-            </div>
-        </div>
-
-        <div class="form-group col-md-12">
-            <label for="prenom">Votre prénom</label>
-            <input type="text" class="form-control" id="prenom" 
-                required
-                [(ngModel)]="reservation.prenom" name="prenom"
-                #prenom="ngModel"
-                disabled
-            >
-            <div [hidden]="prenom.valid || prenom.pristine"
-                class="alert alert-danger">
-                Le prénom est obligatoire
-            </div>
-        </div>-->
-
         <div class="col-md-12">
             <button type="submit" class="btn btn-success" 
                 [disabled]="!reservationForm.form.valid">
                 Valider
             </button>
-            <button type="button" class="btn btn-default" 
+            <!--<button type="button" class="btn btn-default" 
                   (click)=" reservationForm.reset()">
                   Reset
-            </button>
+            </button>-->
         </div>
     </form>
+
 </div>
+
 <br />

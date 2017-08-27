@@ -17,18 +17,9 @@ export class VehiculeService {
  
     getListVehicule (): Observable<Vehicule[]> {
         
-        let url = this.baseUrl + 'vehicule/all';
+        let url = this.baseUrl + 'auth/vehicule/all';
 
-        return this.http.get(url)
-                   .map( this.extractData )
-                   .catch(this.handleError);         
-    }
-    
-    getSearchVehicule (term: string): Observable<Vehicule[]> {
-        
-        let url = this.baseUrl + 'industries/' + term;
-
-        return this.http.get(url)
+        return this.authHttp.get(url)
                    .map( this.extractData )
                    .catch(this.handleError);         
     }

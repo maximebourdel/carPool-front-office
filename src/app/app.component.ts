@@ -8,7 +8,9 @@ import { AuthenticationService } from './authentication/authentication.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
- 
+    
+    nomUtilisateur= localStorage.getItem('nom');
+    prenomUtilisateur= localStorage.getItem('prenom');
     imageLogo: string = './assets/logo.png';
 
     constructor(private authenticationService: AuthenticationService, private router: Router) {}

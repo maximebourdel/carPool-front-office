@@ -12,74 +12,75 @@ import { environment }  from '../../environments/environment';
 export class ReservationService {
  
     baseUrl: string = 'http://' + environment.API_PATH;
+    
            
     constructor (private authHttp: AuthHttp
         , private http: Http) {}
  
     getListReservation (): Observable<Reservation[]> {
         
-        let url = this.baseUrl + 'reservation/all';
+        let url = this.baseUrl + 'auth/reservation/all';
 
-        return this.http.get(url)
-                   .map( this.extractData )
-                   .catch(this.handleError);         
+        return this.authHttp.get(url)
+                   .map( this.extractData );         
+    }
+    
+    getMyListReservation (email: string): Observable<Reservation[]> {
+        
+        let url = this.baseUrl + 'auth/reservations/mies/lists';
+
+        return this.authHttp.post(url,  email )
+                    .map( res => this.extractData(res) )        
     }
     
     getSumdaybydayReservation (): Observable<any[]> {
         
-        let url = this.baseUrl + 'reservation/sumdaybyday';
+        let url = this.baseUrl + 'auth/reservation/sumdaybyday';
 
-        return this.http.get(url)
-                   .map( this.extractData )
-                   .catch(this.handleError);         
+        return this.authHttp.get(url)
+                   .map( this.extractData );         
     }   
 
     getRequete (): Observable<any[]> {
         
-        let url = this.baseUrl + 'reservation/requete';
+        let url = this.baseUrl + 'auth/reservation/requete';
 
-        return this.http.get(url)
-                   .map( this.extractData )
-                   .catch(this.handleError);         
+        return this.authHttp.get(url)
+                   .map( this.extractData );    
     } 
+
+    putStatutReservation (reservation : Reservation): Observable<Reservation> {
         
+        let url = this.baseUrl + 'auth/reservation/statut';        
+        
+        return this.authHttp
+            .put( url, {'id':reservation.id,'statut':reservation.statut} )
+            .map( res => this.extractData(res) )
+        ;
+    }
+            
     getCreneauxByAnneeMois(datesJson: any): Observable<any[]> {
         
-        let url = this.baseUrl + 'reservations/creneauxbyanneemois';
+        let url = this.baseUrl + 'auth/reservations/creneauxbyanneemois';
         
-        return this.http
+        return this.authHttp
             .post(url, JSON.stringify( datesJson ) )
             .map( res => this.extractData(res) )
         ;
-    } 
+    }
 
     createReservation(reservation: Reservation): Observable<Reservation> {
         
-        let url = this.baseUrl + 'reservations';
+        let url = this.baseUrl + 'auth/reservations';
         
-        return this.http
+        return this.authHttp
             .post(url, JSON.stringify( reservation ) )
             .map( res => this.extractData(res) )
         ;
-    }   
+    } 
 
     private extractData(res: Response) {
         let body = res.json();
         return body || { };
-    }
-
-    private handleError (error: Response | any) {
-        // In a real world app, we might use a remote logging infrastructure
-        let errMsg: string;
-        if (error instanceof Response) {
-          const body = error.json() || '';
-          const err = body.error || JSON.stringify(body);
-          errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-        } else {
-          errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        console.error("errMsg");
-        return Observable.throw(errMsg);
     }
 }

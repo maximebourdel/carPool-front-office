@@ -18,13 +18,17 @@ import { VehiculeListComponent }            from './vehicule/vehicule-list.compo
 import { VehiculeService }                  from './vehicule/vehicule.service';
 
 import { ReservationListComponent }         from './reservation/reservation-list.component';
+import { ReservationMyListComponent }       from './reservation/reservation-my-list.component';
 import { ReservationCreateComponent }       from './reservation/reservation-create.component';
 import { ReservationValidateComponent }     from './reservation/reservation-validate.component';
+import { ReservationCreneauxComponent }       from './reservation/creneaux/reservation-creneaux.component';
+
 
 import { ReservationService }               from './reservation/reservation.service';
 
-import { ChartModule }                      from 'angular2-highcharts';
-import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+
+import { FlashMessagesModule } from 'angular2-flash-messages';
+
 
 import { MomentModule } from 'angular2-moment';
 
@@ -48,8 +52,10 @@ export function highchartsFactory() {
             AuthenticationComponent,
             VehiculeListComponent,
             ReservationListComponent,
+            ReservationMyListComponent,
             ReservationCreateComponent,
             ReservationValidateComponent,
+            ReservationCreneauxComponent,
             DatePicker,
   	],
 	imports: [
@@ -58,8 +64,8 @@ export function highchartsFactory() {
 	    HttpModule,
 	    AppRoutingModule,
             ReactiveFormsModule,
-            ChartModule,
-            MomentModule
+            MomentModule,
+            FlashMessagesModule
     ],
     providers: [
         {
@@ -70,11 +76,7 @@ export function highchartsFactory() {
         AuthGuard, 
         AuthenticationService,
         VehiculeService,
-        ReservationService,
-        {
-            provide: HighchartsStatic,
-            useFactory: highchartsFactory
-        }
+        ReservationService
     ],
   	bootstrap: [AppComponent]
 })

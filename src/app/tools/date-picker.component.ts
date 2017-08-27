@@ -1,5 +1,5 @@
 import { forwardRef, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Component } from '@angular/core';
-import { NG_VALUE_ACCESSOR, NG_VALIDATORS } from "@angular/forms";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
 const DATE_PICKER_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -33,7 +33,6 @@ export class DatePicker implements AfterViewInit {
     
     writeValue(date: string) {
         this.value = date;
-        //jQuery(this.input.nativeElement).datepicker('setDate', date);
     }
 
     registerOnChange(fn: any) {

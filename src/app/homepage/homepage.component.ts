@@ -14,6 +14,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
         document.getElementById('nav-home').removeAttribute('class');
     }
     
+    /**
+     * Permet de vérifier si un utilisateur est connecté ou non pour changer l'affichage en conséquent
+     */
     hasAuthToken() {
         return localStorage.getItem('token') !== null;
     }

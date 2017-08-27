@@ -8,6 +8,7 @@ import { ReservationService }   from './reservation.service';
 import { Vehicule }             from '../vehicule/vehicule';
 import { VehiculeService }      from '../vehicule/vehicule.service';
 
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
     selector: 'reservation-create',
@@ -19,14 +20,10 @@ export class ReservationCreateComponent implements OnInit {
     
     errorMessage: string;
     reservation: Reservation = new Reservation ();
-    listData2: any = new Array();
-    listData: any = new Array();
     listVehicule: Vehicule[];
-    
-
-    data:any;
 
     constructor (
+        private _flashMessagesService: FlashMessagesService,
         private reservationService: ReservationService,
         private vehiculeService: VehiculeService,
         private router: Router,
@@ -37,8 +34,10 @@ export class ReservationCreateComponent implements OnInit {
         //Met la navbar reservation-create en active
         document.getElementById('nav-reservation-create').setAttribute('class','active');
         this.getListVehicule();
-        this.reservation.prenom = localStorage.getItem('prenom');
+        this.reservation.email = localStorage.getItem('email');
         this.reservation.nom = localStorage.getItem('nom');
+        this.reservation.prenom = localStorage.getItem('prenom');
+        this.reservation.statut = 'En cours de modération';
     }
 
     ngOnDestroy(): void { 
@@ -62,13 +61,20 @@ export class ReservationCreateComponent implements OnInit {
             .createReservation(this.reservation)
             .subscribe(
                 () => {
-                    this.router.navigate(['reservation']); 
+                    //Redirection vers la page des réservations
+                    this.gotoListReservation();
+                    //Message flash
+                    this._flashMessagesService.show(
+                        'Réservation en cours de modération !'
+                        , { cssClass: 'alert-info', timeout: 3500 }
+                    );
+
                 }
             )
     }
         
     gotoListReservation(): void {
-        this.router.navigate(['reservation']); 
+        this.router.navigate(['reservation/myList']); 
     }
     
     
