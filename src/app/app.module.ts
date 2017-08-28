@@ -15,22 +15,20 @@ import { AuthGuard }                        from './_guards/auth.gard';
 import { AuthenticationService }            from './authentication/authentication.service';
 
 import { VehiculeListComponent }            from './vehicule/vehicule-list.component';
+import { VehiculeDetailComponent }          from './vehicule/vehicule-detail.component';
 import { VehiculeService }                  from './vehicule/vehicule.service';
 
 import { ReservationListComponent }         from './reservation/reservation-list.component';
 import { ReservationMyListComponent }       from './reservation/reservation-my-list.component';
 import { ReservationCreateComponent }       from './reservation/reservation-create.component';
 import { ReservationValidateComponent }     from './reservation/reservation-validate.component';
-import { ReservationCreneauxComponent }       from './reservation/creneaux/reservation-creneaux.component';
-
+import { ReservationCreneauxComponent }     from './reservation/creneaux/reservation-creneaux.component';
 
 import { ReservationService }               from './reservation/reservation.service';
 
+import { FlashMessagesModule }              from 'angular2-flash-messages';
 
-import { FlashMessagesModule } from 'angular2-flash-messages';
-
-
-import { MomentModule } from 'angular2-moment';
+import { MomentModule }                     from 'angular2-moment';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
@@ -53,6 +51,7 @@ export function highchartsFactory() {
             HomepageComponent,
             AuthenticationComponent,
             VehiculeListComponent,
+            VehiculeDetailComponent,
             ReservationListComponent,
             ReservationMyListComponent,
             ReservationCreateComponent,

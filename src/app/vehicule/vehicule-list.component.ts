@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild }    from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Router }               from '@angular/router';
+import { Router }                       from '@angular/router';
  
-import { Vehicule }             from './vehicule';
-import { VehiculeService }      from './vehicule.service';
-import { Observable }           from 'rxjs/Observable';
+import { Vehicule }                     from './vehicule';
+import { VehiculeService }              from './vehicule.service';
+import { Observable }                   from 'rxjs/Observable';
 
 @Component({
     selector: 'vehicule-list',
@@ -35,11 +35,15 @@ export class VehiculeListComponent implements OnInit, OnDestroy {
     }
 
     getListVehicule() {
-        
         this.vehiculeService.getListVehicule()
             .subscribe(
                 listVehicule => this.listVehicule = listVehicule,
                 error =>  this.errorMessage = <any>error,
             );
     }
+
+    goToDetail(vehicule: Vehicule) {
+        this.router.navigate(['vehicule/'+ vehicule.id]);
+    }
+
 }

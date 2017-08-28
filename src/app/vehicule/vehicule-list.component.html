@@ -1,28 +1,27 @@
 
-
-<div class="col-md-12">
-    <h2>Voici la liste des véhicules du parc</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Immatriculation</th>
-                <th>Ville</th>
-                <th>Marque</th>
-                <th>Responsable</th>
-                <th>Kilométrage</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            <tr *ngFor="let vehicule of listVehicule">
-                <td>{{ vehicule.immatriculation }}</td>
-                <td>{{ vehicule.ville }}</td>
-                <td>{{ vehicule.marque }}</td>
-                <td>{{ vehicule.nom_responsable }}</td>
-                <td>{{ vehicule.kilometrage| number:'1.2-2' }} km</td>
-            </tr>
-            
-        </tbody>
-    </table>
-
-</div>
+<div *ngFor="let vehicule of listVehicule" class="list-group col-md-6 col-xs-12">
+    <a (click)="goToDetail(vehicule)" class="list-group-item">    
+        <ul class="list-unstyled">
+            <li class="media">
+                <img class="col-md-4 col-xs-4"
+                    src="./assets/vehicule/photo/{{ vehicule.immatriculation }}.jpg"
+                >
+                <div class="media-body">
+                    <h4 class="mt-0 mb-1">{{ vehicule.immatriculation }} - {{ vehicule.marque }}</h4>
+                    <p>
+                        <i class="fa fa-home"></i>
+                        <b>Ville :</b> {{ vehicule.ville }}</p>
+                    <p>
+                        <i class="fa fa-user-circle-o"></i>
+                        <b>Responsable :</b> {{ vehicule.nom_responsable }}
+                    </p>
+                    <p>
+                        <i class="fa fa-tachometer"></i>
+                        <b>Distance :</b> {{ vehicule.kilometrage| number:'1.2-2' }} km
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </a>
+</div>    
+    

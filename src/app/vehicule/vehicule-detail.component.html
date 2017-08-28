@@ -1,0 +1,47 @@
+
+<div *ngIf="vehicule.id" class="list-group">
+        <ul class="list-unstyled">
+            <li class="media">
+                <img class="col-md-5 col-xs-4"
+                    src="./assets/vehicule/photo/{{ vehicule.immatriculation }}.jpg"
+                >
+                <div class="media-body">
+                    <h4 class="mt-0 mb-1">{{ vehicule.immatriculation }} - {{ vehicule.marque }}</h4>
+                    <p>
+                        <i class="fa fa-home fa-2x"></i>
+                        <b>Ville :</b> {{ vehicule.ville }}
+                    </p>
+                    <p>
+                        <i class="fa fa-user-circle-o fa-2x"></i>
+                        <b>Responsable :</b> {{ vehicule.nom_responsable }}
+                    </p>
+                    <p>
+                        <i class="fa fa-tachometer fa-2x"></i>
+                        <b>Distance :</b> 
+                        {{ vehicule.kilometrage| number:'1.2-2' }} km
+                    </p>
+                    <p>
+                        <i class="fa fa-thermometer-half fa-2x"></i>
+                        <b>Climatisation :</b> TO DO
+                    </p>
+                    <p>
+                        <i class="fa fa-calendar fa-2x"></i>
+                        <b>Date première immatriculation :</b>
+                        {{ vehicule.date_premiere_immatriculation | amDateFormat: 'YYYY-MM-DD' }} 
+                    </p>
+                    <p>
+                        <i class="fa fa-calendar fa-2x"></i>
+                        <b>Date arrivée B&D :</b>
+                        {{ vehicule.date_arrivee_vehicule_bd | amDateFormat: 'YYYY-MM-DD' }} 
+                    </p>
+                    <p>
+                        <i class="fa fa-calendar-check-o fa-2x"></i>
+                        <b>Dernière révision :</b>
+                        {{ vehicule.derniere_revision }}
+                    </p>
+
+                </div>
+            </li>
+        </ul>
+</div>    
+    
