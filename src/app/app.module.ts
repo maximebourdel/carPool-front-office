@@ -32,6 +32,8 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { MomentModule } from 'angular2-moment';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 declare var require : any;
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -76,7 +78,11 @@ export function highchartsFactory() {
         AuthGuard, 
         AuthenticationService,
         VehiculeService,
-        ReservationService
+        ReservationService,
+		{
+			provide: LocationStrategy
+			, useClass: HashLocationStrategy
+		}
     ],
   	bootstrap: [AppComponent]
 })
