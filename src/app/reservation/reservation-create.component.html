@@ -1,5 +1,5 @@
 
-<div class="col-md-12">
+<div>
     <button type="button" class="btn btn-default" 
         (click)="gotoListReservation()">
         <i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -9,70 +9,80 @@
 
 <br />
 
-<h2>Etape 1 : Vérifiez les disponibilités de votre créneau</h2>
-<reservation-creneaux>Chargement des créneaux...</reservation-creneaux>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Etape 1 : Vérifiez les disponibilités de votre créneau</h3>
+    </div>
+    <div class="panel-body">
+        <reservation-creneaux>Chargement des créneaux...</reservation-creneaux>
+    </div>
+</div>
 
 <br />
 
-<h2>Etape 2 : Effectuez votre réservation</h2>
-<div class="col-md-6">
-    <h1>Nouvelle Réservation</h1>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Etape 2 : Remplir le formulaire</h3>
+    </div>
+    <div class="panel-body">
+    
+        <form (ngSubmit)="addReservation()" #reservationForm="ngForm">
 
-    <form (ngSubmit)="addReservation()" #reservationForm="ngForm">
-
-        <div class="form-group col-md-6">
-            <label for="dateDebut">Date début réservation</label>
-            <my-datepicker #dateDebut 
-                    name="dateDebut" id="dateDebut" 
-                    [myNgClass]="'form-control'"
-                    [required]="true"
-                    [ngModel]="reservation.date_debut | date:'yyyy-MM-dd'" 
-                    (ngModelChange)="reservation.date_debut = dateDebut.value"
-            >
-            </my-datepicker>
-        </div>        
-
-        
-        <div class="form-group col-md-6">
-            <label for="dateFin">Date fin réservation</label>
-            <my-datepicker #dateFin
-                    name="dateFin" id="dateFin"
-                    [myNgClass]="'form-control'"
-                    [required]="true"
-                    [ngModel]="reservation.date_fin | date:'yyyy-MM-dd'" 
-                    (ngModelChange)="reservation.date_fin = dateFin.value">
-            </my-datepicker>            
-        </div>   
-        
-        
-        <div class="form-group col-md-12">
-            <label for="vehicule">Véhicule</label>
-            <select 
-                required
-                [ngModel]="reservation.vehicule" 
-                name= 'vehicule' 
-                (ngModelChange)="reservation.vehicule= $event"
-            >
-                <option *ngFor="let vehicule of listVehicule"  
-                    [ngValue]="vehicule"
+            <div class="form-group col-md-6">
+                <label for="dateDebut">Date début réservation</label>
+                <my-datepicker #dateDebut 
+                        name="dateDebut" id="dateDebut" 
+                        [myNgClass]="'form-control'"
+                        [required]="true"
+                        [ngModel]="reservation.date_debut | date:'yyyy-MM-dd'" 
+                        (ngModelChange)="reservation.date_debut = dateDebut.value"
                 >
-                    {{vehicule.immatriculation}} - {{vehicule.marque}} 
-                </option>
-            </select>
-        </div>
+                </my-datepicker>
+            </div>        
 
-        <div class="col-md-12">
-            <button type="submit" class="btn btn-success" 
-                [disabled]="!reservationForm.form.valid">
-                Valider
-            </button>
-            <!--<button type="button" class="btn btn-default" 
-                  (click)=" reservationForm.reset()">
-                  Reset
-            </button>-->
-        </div>
-    </form>
 
+            <div class="form-group col-md-6">
+                <label for="dateFin">Date fin réservation</label>
+                <my-datepicker #dateFin
+                        name="dateFin" id="dateFin"
+                        [myNgClass]="'form-control'"
+                        [required]="true"
+                        [ngModel]="reservation.date_fin | date:'yyyy-MM-dd'" 
+                        (ngModelChange)="reservation.date_fin = dateFin.value">
+                </my-datepicker>            
+            </div>   
+
+
+            <div class="form-group col-md-12">
+                <label for="vehicule">Véhicule</label>
+                <select 
+                    required
+                    [ngModel]="reservation.vehicule" 
+                    name= 'vehicule' 
+                    (ngModelChange)="reservation.vehicule= $event"
+                >
+                    <option *ngFor="let vehicule of listVehicule"  
+                        [ngValue]="vehicule"
+                    >
+                        {{vehicule.immatriculation}} - {{vehicule.marque}} 
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success" 
+                    [disabled]="!reservationForm.form.valid">
+                    Valider
+                </button>
+                <!--<button type="button" class="btn btn-default" 
+                      (click)=" reservationForm.reset()">
+                      Reset
+                </button>-->
+            </div>
+        </form>        
+        
+    </div>
 </div>
+
 
 <br />
