@@ -14,8 +14,7 @@
             <tr>
                 <th>Date Début résa</th>
                 <th>Date Fin résa</th>
-                <th>Marque Vehicule</th>
-                <th>Immatriculation Vehicule</th>
+                <th>Vehicule</th>
                 <th>Statut</th>
                 <th>Action</th>
             </tr>
@@ -25,13 +24,12 @@
             <tr *ngFor="let reservation of listReservation">
                 <td>{{ reservation.date_debut | amDateFormat: 'YYYY-MM-DD' }}</td>
                 <td>{{ reservation.date_fin | amDateFormat: 'YYYY-MM-DD' }}</td>
-                <td>{{ reservation.vehicule.marque }}</td>
-                <td>{{ reservation.vehicule.immatriculation }}</td>
+                <td>{{ reservation.vehicule.immatriculation }} - {{ reservation.vehicule.marque }}</td>
                 <td>{{ reservation.statut }}</td>
                 <th>
                     <button type="button" class="btn btn-danger" 
                         (click)="cancelReservation(reservation)">
-                        Annuler demande
+                        Annuler
                     </button>
                 </th>
             </tr>
