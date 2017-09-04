@@ -22,6 +22,10 @@ export class VehiculeDetailComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.getVehicule();
+    }
+    
+    getVehicule(){
         this.route.params
             .switchMap((params: Params) => this.vehiculeService.getVehicule(params['id']))
             .subscribe(vehicule => this.vehicule = vehicule);

@@ -30,6 +30,8 @@ import { FlashMessagesModule }              from 'angular2-flash-messages';
 
 import { MomentModule }                     from 'angular2-moment';
 
+import { JwtHelper }                        from 'angular2-jwt';
+
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 declare var require : any;
@@ -78,10 +80,11 @@ export function highchartsFactory() {
         AuthenticationService,
         VehiculeService,
         ReservationService,
-		{
-			provide: LocationStrategy
-			, useClass: HashLocationStrategy
-		}
+        {
+                provide: LocationStrategy
+                , useClass: HashLocationStrategy
+        },
+        JwtHelper
     ],
   	bootstrap: [AppComponent]
 })

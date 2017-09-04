@@ -12,7 +12,7 @@ declare var jQuery: any;
   selector: 'my-datepicker',
   template: `   
                 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-                <input #input type="text" [ngClass]="myNgClass" ngRequired="required">
+                <input #input type="text" [class]="status" required readonly>
             `,
   providers: [DATE_PICKER_VALUE_ACCESSOR],
   
@@ -29,14 +29,20 @@ export class DatePicker implements AfterViewInit {
     @Input() options: any = {};
   
     @Input() value: string = '';
+    
+    @Input() status: string = "form-control ng-invalid";
  
+    checkStatus(value: string){
+        this.status="form-control ";
+        //Si la valeur est 
+        return value=='' ? this.status+="ng-invalid" : this.status+="ng-valid"; 
+    }
     
     writeValue(date: string) {
         this.value = date;
     }
 
     registerOnChange(fn: any) {
-        
         this.onChange = fn;
     }
 
@@ -49,8 +55,10 @@ export class DatePicker implements AfterViewInit {
     @ViewChild('input') input: ElementRef;
 
     ngAfterViewInit() {
+        
         jQuery(this.input.nativeElement).datepicker(Object.assign({}, this.options, {
             onSelect: (value:any) => {
+                
                 this.value = value;
 
                 this.onChange(value);
@@ -58,11 +66,17 @@ export class DatePicker implements AfterViewInit {
                 this.onTouched();
 
                 this.dateChange.next(value);
+                
+                //change la couleur de l'input
+                this.checkStatus(value);              
+                
             }
         })).datepicker('setDate', this.value)
         .datepicker( "option", "dateFormat", "yy-mm-dd" );
         //Afin de ne plus avoir de problème au début du chargement de la page
         document.getElementById('ui-datepicker-div').setAttribute('style', "display:none;" );
+        
+        
 
     ;
     

@@ -10,6 +10,7 @@ import { VehiculeService }          from '../vehicule/vehicule.service';
 
 import { FlashMessagesService } from 'angular2-flash-messages';
 
+import { JwtHelper } from 'angular2-jwt';
 
 @Component({
     selector: 'reservation-my-list',
@@ -21,10 +22,13 @@ export class ReservationMyListComponent implements OnInit {
     errorMessage: string;
     listReservation: Reservation[];
     listVehicule: Vehicule[];
-    nomUtilisateur= localStorage.getItem('nom');
-    prenomUtilisateur= localStorage.getItem('prenom');
+    userAttributes = this.jwtHelper.decodeToken(localStorage.getItem('token'));
+    nomUtilisateur = this.userAttributes['nom'];
+    prenomUtilisateur = this.userAttributes['prenom'];
+    emailUtilisateur = this.userAttributes['username'];
 
     constructor (
+        private jwtHelper: JwtHelper,
         private _flashMessagesService: FlashMessagesService,    
         private reservationService: ReservationService,
         private router: Router,
@@ -34,7 +38,6 @@ export class ReservationMyListComponent implements OnInit {
         //Met la navbar nav-liste-reservation en active
         document.getElementById('nav-my-liste-reservation').setAttribute('class','active');
         this.getMyListReservation(); 
-        
     }
     
     ngOnDestroy() {
@@ -43,7 +46,7 @@ export class ReservationMyListComponent implements OnInit {
     }
 
     getMyListReservation() {
-        this.reservationService.getMyListReservation(localStorage.getItem('email'))
+        this.reservationService.getMyListReservation(this.emailUtilisateur)
             .subscribe(
                 listReservation => this.listReservation = listReservation,
                 error =>  this.errorMessage = <any>error,
