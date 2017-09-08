@@ -1,9 +1,8 @@
-import { Component, OnInit, OnChanges}          from '@angular/core';
+import { Component, OnInit}                     from '@angular/core';
 //Pour gérer les redirections
 import { Router }                               from '@angular/router';
 //Gestion des formulaires
-import { FormControl, FormGroup
-    , FormBuilder , Validators}                 from '@angular/forms';
+import { FormGroup, FormBuilder , Validators}   from '@angular/forms';
 //Import des Classes Reservation
 import { Reservation }                          from './reservation';
 import { ReservationService }                   from './reservation.service';
@@ -20,13 +19,15 @@ import { JwtHelper }                            from 'angular2-jwt';
     providers: [ReservationService, VehiculeService],
     templateUrl: 'reservation-create.component.html'
 })
-export class ReservationCreateComponent implements OnInit, OnChanges {
+export class ReservationCreateComponent implements OnInit {
 
     
     errorMessage: string;
     reservation: Reservation = new Reservation ();
     listVehicule: Vehicule[];
+    vehiculeDispo: Vehicule;
     reservationForm: FormGroup;
+    dateValid: string = 'false';
 
     constructor (
         private jwtHelper: JwtHelper,
@@ -61,18 +62,44 @@ export class ReservationCreateComponent implements OnInit, OnChanges {
                 error =>  this.errorMessage = <any>error,
             );
     }
+    
+    getVehiculeDispo(dateDebut: string, dateFin :string) {
+        this.vehiculeService.getVehiculeDispo(dateDebut,dateFin)
+            .subscribe( 
+                (vehiculeDispo) => {
+                    //pas de résultat
+                    if (vehiculeDispo.id == null){
+                        
+                        this.vehiculeDispo = null
+                    } else {
+                        this.vehiculeDispo = vehiculeDispo;
+                    }
+                    this.reservationForm.value.vehicule = this.vehiculeDispo;
+                }
+                
+            );
+         
+        
+    }
 
     addReservation(): void { 
+        
+        //On vérifie que le formulaire n'est pas vide
         if (!this.reservationForm) { return; }
+        
         //on initalise les autres variables 
         var userAttributes = this.jwtHelper.decodeToken(localStorage.getItem('token'));
+        
         this.reservation.email = userAttributes['username'];
         this.reservation.nom = userAttributes['nom'];
         this.reservation.prenom = userAttributes['prenom'];
-        this.reservation.statut = 'En cours de modération'; 
+        this.reservation.statut = 'En cours de modération';
         this.reservation.date_debut = this.reservationForm.value.dateDebut;
         this.reservation.date_fin = this.reservationForm.value.dateFin;
-        this.reservation.vehicule = this.reservationForm.value.vehicule;           
+        
+        this.reservation.vehicule = this.vehiculeDispo;   
+        
+        
         this.reservationService
             .createReservation(this.reservation)
             .subscribe(
@@ -86,32 +113,38 @@ export class ReservationCreateComponent implements OnInit, OnChanges {
                     );
                 }
             )
-    }
+    }    
     
-    checkDatesReservation() {
-        if (this.reservation.date_debut <= this.reservation.date_fin) { 
-            return true;
-        } else {
-            alert('Dates non conformes');
-            return false;
-        }        
-    }
-    
-    ngOnChanges() {
-        this.reservationForm.reset({
-          dateDebut: this.reservation.date_debut
-          , dateFin: this.reservation.date_fin
-          , vehicule: this.reservation.vehicule
-        });
+    checkDatesReservation(dateDebut: string,dateFin: string) {
+        if(dateDebut !== '' && dateFin !== '') {
+            if (dateDebut <= dateFin) {
+                //On appelle
+                this.getVehiculeDispo(dateDebut,dateFin);
+                 
+            } else {
+                this._flashMessagesService.show(
+                        'Dates non conformes !'
+                        , { cssClass: 'alert-danger', timeout: 3500 }
+                );
+                //on n'affiche plus le vehicule
+                this.vehiculeDispo=undefined;
+                            }  
+        }
     }
     
     createForm() {
         this.reservationForm = this.fb.group({ 
-            dateDebut: ['' , Validators.minLength(10)]
-            , dateFin: ['' , Validators.minLength(10)]
-            , vehicule:['' , Validators.minLength(10)]
+            dateDebut: ['', Validators.minLength(10) ]
+            , dateFin: ['', Validators.minLength(10) ]
             
         });
+        //Active le suivi de date début et date_fin
+        let nameControl = this.reservationForm.valueChanges;
+        nameControl.forEach(
+            (value) => this.checkDatesReservation(value.dateDebut,value.dateFin)
+        );
+        
+        
     }
         
     gotoListReservation(): void {

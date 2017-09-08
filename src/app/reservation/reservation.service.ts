@@ -1,5 +1,5 @@
 import { Injectable }   from '@angular/core';
-import { Response, Http }     from '@angular/http';
+import { Response }     from '@angular/http';
 import { AuthHttp }     from 'angular2-jwt';
 
 import { Reservation }  from './reservation';
@@ -14,8 +14,7 @@ export class ReservationService {
     baseUrl: string = 'http://' + environment.API_PATH;
     
            
-    constructor (private authHttp: AuthHttp
-        , private http: Http) {}
+    constructor (private authHttp: AuthHttp) {}
  
     getListReservation (): Observable<Reservation[]> {
         
