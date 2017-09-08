@@ -10,6 +10,8 @@ export class Reservation {
         public date_debut?: string,
         public date_fin?: string,
         public statut?: string,
+        public date_creation?: string,
+        public date_der_maj?: string,
      
     ) { }
 }
