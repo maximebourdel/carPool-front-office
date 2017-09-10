@@ -1,16 +1,15 @@
-import { Component, OnInit }     from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
 
 import { Router }               from '@angular/router';
 
 import { Reservation }          from './reservation';
 import { ReservationService }   from './reservation.service';
 
-import { Vehicule }             from '../vehicule/vehicule';
-import { VehiculeService }      from '../vehicule/vehicule.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
     selector: 'reservation-validate',
-    providers: [ReservationService, VehiculeService],
+    providers: [ReservationService],
     templateUrl: 'reservation-validate.component.html'
 })
 export class ReservationValidateComponent implements OnInit {
@@ -18,14 +17,11 @@ export class ReservationValidateComponent implements OnInit {
     
     errorMessage: string;
     reservation: Reservation = new Reservation ();
-    listVehicule: Vehicule[];
-
-
-    data:any;
+    listReservation: Reservation[];
 
     constructor (
+        private _flashMessagesService: FlashMessagesService,    
         private reservationService: ReservationService,
-        private vehiculeService: VehiculeService,
         private router: Router,
     ) {} 
     
@@ -33,7 +29,7 @@ export class ReservationValidateComponent implements OnInit {
     ngOnInit(): void { 
         //Met la navbar reservation-create en active
         document.getElementById('nav-reservation-validate').setAttribute('class','active');
-        this.getListVehicule();
+        this.getListReservation();
     }
 
     ngOnDestroy(): void { 
@@ -42,31 +38,26 @@ export class ReservationValidateComponent implements OnInit {
     } 
 
            
-    getListVehicule() {
-        
-        this.vehiculeService.getListVehicule()
+    getListReservation() {
+        this.reservationService.getListReservation()
             .subscribe(
-                listVehicule => this.listVehicule = listVehicule,
+                listReservation => this.listReservation = listReservation,
                 error =>  this.errorMessage = <any>error,
             );
     }
     
-    addReservation(): void { 
-        if (!this.reservation) { return; }
-        this.reservationService
-            .createReservation(this.reservation)
+    putStatutReservation (reservation: Reservation, statut: string, message: string) {
+        reservation.statut= statut;
+        
+        this.reservationService.putStatutReservation(reservation)
             .subscribe(
                 () => {
-                    this.router.navigate(['reservation']); 
+                    //Message flash
+                    this._flashMessagesService.show(
+                        message
+                        , { cssClass: 'alert-info', timeout: 3500 }
+                    );
                 }
             )
     }
-        
-    gotoListReservation(): void {
-        this.router.navigate(['reservation']); 
-    }
-    
-    
-
-    
 }

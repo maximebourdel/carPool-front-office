@@ -37,4 +37,19 @@ export class AppComponent {
         this.authenticationService.logout();
         this.router.navigate(['']);  
     }
+    
+    isAdmin() {
+        if(this.hasAuthToken()){
+            var userAttributes = this.jwtHelper.decodeToken(localStorage.getItem('token'));
+            
+            if (userAttributes['roles'][0] === 'ROLE_ADMIN'){
+                return true;
+            } else {
+                return false
+            }
+                
+        } else {
+            return false;
+        }
+    }
 }

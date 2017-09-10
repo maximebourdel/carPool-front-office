@@ -1,16 +1,16 @@
-import { Component, OnInit }        from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
 
-import { Router }                   from '@angular/router';
+import { Router }               from '@angular/router';
  
-import { Reservation }              from './reservation';
-import { ReservationService }       from './reservation.service';
+import { Reservation }          from './reservation';
+import { ReservationService }   from './reservation.service';
 
-import { Vehicule }                 from '../vehicule/vehicule';
-import { VehiculeService }          from '../vehicule/vehicule.service';
+import { Vehicule }             from '../vehicule/vehicule';
+import { VehiculeService }      from '../vehicule/vehicule.service';
 
 import { FlashMessagesService } from 'angular2-flash-messages';
 
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelper }            from 'angular2-jwt';
 
 @Component({
     selector: 'reservation-my-list',

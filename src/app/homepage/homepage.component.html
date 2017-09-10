@@ -62,10 +62,10 @@
             </div>
         </div>
         
-        <!--<div class="col-md-4" *ngIf="hasAuthToken()">        
+        <div class="col-md-4" *ngIf="isAdmin()">        
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <a [routerLink]="['reservation/validate']">
+                    <a [routerLink]="['reservation/administration']">
                         <div class="row">
                             <div class="col-xs-4">     
                                 <i class="fa fa-key fa-5x"></i>
@@ -78,7 +78,7 @@
                     </a>
                 </div>
             </div>
-        </div>-->
+        </div>
          
     </div><!-- /.container-fluid -->
     

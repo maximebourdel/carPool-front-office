@@ -3,7 +3,7 @@ import { Routes, RouterModule }         from '@angular/router';
  
 import { HomepageComponent }            from './homepage/homepage.component';
 import { AuthenticationComponent }      from './authentication/authentication.component';
-import { AuthGuard }                    from './_guards/auth.gard';
+import { AuthGuard, AuthAdminGuard }    from './_guards/auth.gard';
 
 import { VehiculeListComponent }        from './vehicule/vehicule-list.component';
 import { VehiculeDetailComponent }      from './vehicule/vehicule-detail.component';
@@ -26,7 +26,7 @@ const routes: Routes = [
 	{ path: 'reservation/list', component: ReservationListComponent, canActivate: [AuthGuard] },
         { path: 'reservation/myList', component: ReservationMyListComponent, canActivate: [AuthGuard] },
         { path: 'reservation/new', component: ReservationCreateComponent, canActivate: [AuthGuard] },
-        { path: 'reservation/validate', component: ReservationValidateComponent, canActivate: [AuthGuard] },   
+        { path: 'reservation/administration', component: ReservationValidateComponent, canActivate: [AuthAdminGuard] },   
         
         //Else
 	{ path: '**', redirectTo: '' }

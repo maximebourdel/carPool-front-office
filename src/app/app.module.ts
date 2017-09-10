@@ -11,7 +11,7 @@ import { AuthenticationComponent }          from './authentication/authenticatio
 import { AppRoutingModule }                 from './app-routing.module';
 
 import { AuthHttp, AuthConfig }             from 'angular2-jwt';
-import { AuthGuard }                        from './_guards/auth.gard';
+import { AuthGuard, AuthAdminGuard }        from './_guards/auth.gard';
 import { AuthenticationService }            from './authentication/authentication.service';
 
 import { VehiculeListComponent }            from './vehicule/vehicule-list.component';
@@ -76,6 +76,7 @@ export function highchartsFactory() {
             useFactory: authHttpServiceFactory,
             deps: [ Http, RequestOptions ]
         }, 
+        AuthAdminGuard,
         AuthGuard, 
         AuthenticationService,
         VehiculeService,

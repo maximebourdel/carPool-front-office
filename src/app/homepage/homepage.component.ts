@@ -1,10 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+//pour le décryptage du token
+import { JwtHelper }                    from 'angular2-jwt';
+
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html'
 })
 export class HomepageComponent implements OnInit, OnDestroy {
+
+    constructor (
+        private jwtHelper: JwtHelper
+    ) {} 
 
     ngOnInit(): void {
         document.getElementById('nav-home').setAttribute('class','active');
@@ -20,5 +27,20 @@ export class HomepageComponent implements OnInit, OnDestroy {
     hasAuthToken() {
         return localStorage.getItem('token') !== null;
     }
-    
+
+    isAdmin() {
+        if(this.hasAuthToken()){
+            var userAttributes = this.jwtHelper.decodeToken(localStorage.getItem('token'));
+            
+            if (userAttributes['roles'][0] === 'ROLE_ADMIN'){
+                return true;
+            } else {
+                return false
+            }
+                
+        } else {
+            return false;
+        }
+    }
+        
 }

@@ -36,11 +36,11 @@
                     <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Nouvelle réservation
                 </a>
             </li>
-            <!--<li id="nav-reservation-validate" >
-                <a [routerLink]="['reservation/validate']">
+            <li  *ngIf="isAdmin()" id="nav-reservation-validate" >
+                <a [routerLink]="['reservation/administration']">
                     <i class="fa fa-key" aria-hidden="true"></i> Administration
                 </a>
-            </li>-->
+            </li>
         </ul>
         
         <ul class="nav navbar-nav pull-right">
