@@ -11,24 +11,6 @@
         <div class="col-md-4">        
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a [routerLink]="['vehicule']">
-                        <div class="row">
-                            <div class="col-xs-4">     
-                                <i class="fa fa-car fa-5x"> </i> 
-                            </div>
-                            <br />
-                            <div class="col-xs-8">     
-                                <h4>Liste des véhicules</h4>
-                            </div> 
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">        
-            <div class="panel panel-default">
-                <div class="panel-heading">
                     <a [routerLink]="['reservation/myList']">
                         <div class="row">
                             <div class="col-xs-4">     
@@ -62,7 +44,7 @@
             </div>
         </div>
         
-        <div class="col-md-4" *ngIf="isAdmin()">        
+        <div *ngIf="isAdmin()" class="col-md-4">        
             <div class="panel panel-danger">
                 <div class="panel-heading">
                     <a [routerLink]="['reservation/administration']">
@@ -73,6 +55,24 @@
                             <br />
                             <div class="col-xs-8">     
                                 <h4>Administration</h4>
+                            </div> 
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="isAdmin()" class="col-md-4">        
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <a [routerLink]="['vehicule']">
+                        <div class="row">
+                            <div class="col-xs-4">     
+                                <i class="fa fa-car fa-5x"> </i> 
+                            </div>
+                            <br />
+                            <div class="col-xs-8">     
+                                <h4>Liste des véhicules</h4>
                             </div> 
                         </div>
                     </a>

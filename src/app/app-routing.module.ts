@@ -19,8 +19,8 @@ const routes: Routes = [
 	{ path: 'login', component: AuthenticationComponent},
 
 	//Pour les véhicules
-	{ path: 'vehicule', component: VehiculeListComponent, canActivate: [AuthGuard] },
-	{ path: 'vehicule/:id', component: VehiculeDetailComponent , canActivate: [AuthGuard] },
+	{ path: 'vehicule', component: VehiculeListComponent, canActivate: [AuthAdminGuard] },
+	{ path: 'vehicule/:id', component: VehiculeDetailComponent , canActivate: [AuthAdminGuard] },
         
         //Pour les réservations
 	{ path: 'reservation/list', component: ReservationListComponent, canActivate: [AuthGuard] },

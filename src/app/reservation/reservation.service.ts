@@ -18,7 +18,7 @@ export class ReservationService {
  
     getListReservation (): Observable<Reservation[]> {
         
-        let url = this.baseUrl + 'auth/reservation/all';
+        let url = this.baseUrl + 'admin/reservation/all';
 
         return this.authHttp.get(url)
                    .map( this.extractData );         

@@ -21,11 +21,6 @@
                     <i class="fa fa-home" aria-hidden="true"></i> Home
                 </a>
             </li>
-            <li id="nav-vehicule">
-                <a [routerLink]="['vehicule']">
-                    <i class="fa fa-car" aria-hidden="true"></i> Liste véhicules 
-                </a>
-            </li>
             <li id="nav-my-liste-reservation">
                 <a [routerLink]="['reservation/myList']">
                     <i class="fa fa-calendar" aria-hidden="true"></i> Mes réservations
@@ -39,6 +34,11 @@
             <li  *ngIf="isAdmin()" id="nav-reservation-validate" >
                 <a [routerLink]="['reservation/administration']">
                     <i class="fa fa-key" aria-hidden="true"></i> Administration
+                </a>
+            </li>
+            <li *ngIf="isAdmin()" id="nav-vehicule">
+                <a [routerLink]="['vehicule']">
+                    <i class="fa fa-car" aria-hidden="true"></i> Liste véhicules 
                 </a>
             </li>
         </ul>

@@ -3,6 +3,7 @@
     <table *ngIf="listReservation?.length > 0" class="table">
         <thead>
             <tr>
+                <th>Date création</th>
                 <th>Nom prénom</th>
                 <th>Date Début résa</th>
                 <th>Date Fin résa</th>
@@ -14,6 +15,7 @@
         <tbody>
             
             <tr *ngFor="let reservation of listReservation">
+                <td>{{ reservation.date_creation | amDateFormat: 'YYYY-MM-DD HH' }}h </td>
                 <td>{{ reservation.nom }} {{ reservation.prenom }}</td>
                 <td>{{ reservation.date_debut | amDateFormat: 'YYYY-MM-DD' }}</td>
                 <td>{{ reservation.date_fin | amDateFormat: 'YYYY-MM-DD' }}</td>

@@ -16,7 +16,7 @@ export class VehiculeService {
  
     getListVehicule (): Observable<Vehicule[]> {
         
-        let url = this.baseUrl + 'auth/vehicule/all';
+        let url = this.baseUrl + 'admin/vehicule/all';
 
         return this.authHttp.get(url)
                    .map( this.extractData );         
@@ -24,7 +24,7 @@ export class VehiculeService {
 
     getVehicule (vehiculeId: number): Observable<Vehicule> {
         
-        let url = this.baseUrl + 'auth/vehicules/';
+        let url = this.baseUrl + 'admin/vehicules/';
 
         return this.authHttp.get(url + vehiculeId)
                    .map( this.extractData );      
