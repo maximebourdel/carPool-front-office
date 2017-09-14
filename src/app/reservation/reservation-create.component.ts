@@ -41,7 +41,6 @@ export class ReservationCreateComponent implements OnInit {
         this.createForm();
     } 
 
-    
     ngOnInit(): void { 
         //Met la navbar reservation-create en active
         document.getElementById('nav-reservation-create').setAttribute('class','active');
@@ -53,7 +52,6 @@ export class ReservationCreateComponent implements OnInit {
         document.getElementById('nav-reservation-create').removeAttribute('class');
     } 
 
-           
     getListVehicule() {
         
         this.vehiculeService.getListVehicule()
@@ -63,23 +61,19 @@ export class ReservationCreateComponent implements OnInit {
             );
     }
     
-    getVehiculeDispo(dateDebut: string, dateFin :string) {
-        this.vehiculeService.getVehiculeDispo(dateDebut,dateFin)
+    getVehiculeDispo(dateDebut: string, dateFin: string, ville: string) {
+        this.vehiculeService.getVehiculeDispo(dateDebut,dateFin, ville)
             .subscribe( 
                 (vehiculeDispo) => {
                     //pas de résultat
                     if (vehiculeDispo.id == null){
-                        
                         this.vehiculeDispo = null
                     } else {
                         this.vehiculeDispo = vehiculeDispo;
                     }
                     this.reservationForm.value.vehicule = this.vehiculeDispo;
                 }
-                
-            );
-         
-        
+            );        
     }
 
     addReservation(): void { 
@@ -115,11 +109,12 @@ export class ReservationCreateComponent implements OnInit {
             )
     }    
     
-    checkDatesReservation(dateDebut: string,dateFin: string) {
+    checkDatesReservation(dateDebut: string, dateFin: string, ville: string) {
         if(dateDebut !== '' && dateFin !== '') {
+            //On vérifie que les dates sont conformes
             if (dateDebut <= dateFin) {
-                //On appelle
-                this.getVehiculeDispo(dateDebut,dateFin);
+                //On appelle la fonction de recherche d'un véhicule
+                this.getVehiculeDispo(dateDebut, dateFin, ville);
                  
             } else {
                 this._flashMessagesService.show(
@@ -128,30 +123,30 @@ export class ReservationCreateComponent implements OnInit {
                 );
                 //on n'affiche plus le vehicule
                 this.vehiculeDispo=undefined;
-                            }  
+            }  
         }
     }
     
     createForm() {
+        //initialise les éléments du formulaire
         this.reservationForm = this.fb.group({ 
-            dateDebut: ['', Validators.minLength(10) ]
-            , dateFin: ['', Validators.minLength(10) ]
+             ville:         ['Nantes', Validators.required ]
+            , dateDebut:    ['', Validators.minLength(10) ]
+            , dateFin:      ['', Validators.minLength(10) ]
             
         });
         //Active le suivi de date début et date_fin
         let nameControl = this.reservationForm.valueChanges;
         nameControl.forEach(
-            (value) => this.checkDatesReservation(value.dateDebut,value.dateFin)
-        );
-        
-        
+            (value) => this.checkDatesReservation(
+                    value.dateDebut
+                    , value.dateFin
+                    , value.ville
+            )
+        );        
     }
         
     gotoListReservation(): void {
         this.router.navigate(['reservation/myList']); 
     }
-    
-    
-
-    
 }

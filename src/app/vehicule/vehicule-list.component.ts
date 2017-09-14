@@ -25,13 +25,13 @@ export class VehiculeListComponent implements OnInit, OnDestroy {
 
     ngOnInit() { 
         //Met la navbar nav-vehicule en active
-        document.getElementById('nav-vehicule').setAttribute('class','active');
+        document.getElementById('nav-reservation-admin').setAttribute('class','active');
         this.getListVehicule(); 
     }
 
     ngOnDestroy() { 
         //Met la navbar nav-vehicule en inactive
-        document.getElementById('nav-vehicule').removeAttribute('class');
+        document.getElementById('nav-reservation-admin').removeAttribute('class');
     }
 
     getListVehicule() {

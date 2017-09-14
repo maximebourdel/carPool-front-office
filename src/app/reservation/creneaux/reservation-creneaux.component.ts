@@ -1,15 +1,15 @@
-import { Component, OnInit }        from '@angular/core';
-import { FormBuilder, FormGroup }   from '@angular/forms';
+import {Component, OnInit, OnDestroy }  from '@angular/core';
+import { FormBuilder, FormGroup }       from '@angular/forms';
  
-import { Reservation }              from '../reservation';
-import { ReservationService }       from '../reservation.service';
+import { Reservation }                  from '../reservation';
+import { ReservationService }           from '../reservation.service';
 
 @Component({
     selector: 'reservation-creneaux',
     templateUrl: 'reservation-creneaux.component.html',
     providers: [ ReservationService ]
 })
-export class ReservationCreneauxComponent implements OnInit {
+export class ReservationCreneauxComponent implements OnInit, OnDestroy {
     
     listReservation: Reservation[];
     dateToday= new Date();
@@ -26,13 +26,20 @@ export class ReservationCreneauxComponent implements OnInit {
     constructor (
         private reservationService: ReservationService,
         private formBuilder: FormBuilder,
-    ) { }
+    ) { 
+        this.createForm();
+    }
 
     createForm() {
         this.datesForm = this.formBuilder.group({
           annee: this.yyyy,
           mois: this.mm
         });
+        //Active la mise à jour auto du formulaire
+        let nameControl = this.datesForm.valueChanges;
+        nameControl.forEach(
+            () => this.getCreneauxByAnneeMois()
+        ); 
     }
     
     color($value:number){
@@ -44,8 +51,17 @@ export class ReservationCreneauxComponent implements OnInit {
     }
     
     ngOnInit() {
-        //Met la navbar nav-liste-reservation en active
+        //Met la navbar nav-creneaux en active
+        document.getElementById('nav-creneaux').setAttribute('class','active');
+        //Initialise le formulaire
         this.createForm();
+        //Affiche les créneaux
+        this.getCreneauxByAnneeMois();
+    }
+    
+    ngOnDestroy() {
+        //Met la navbar nav-creneaux en inactive
+        document.getElementById('nav-creneaux').removeAttribute('class');
     }
 
     getCreneauxByAnneeMois(): void {   
@@ -74,7 +90,7 @@ export class ReservationCreneauxComponent implements OnInit {
                     list.push(immatriculationPrec);
                     for (let data of apiListCreneauxByAnneeMois ){
                         //on incrémente le compteur 
-                        cpt++;
+                        cpt++;immatriculationPrec
                         //changement de vehicule
                         if(immatriculationPrec != data.immatriculation ) {
                             immatriculationPrec = data.immatriculation;
@@ -93,9 +109,6 @@ export class ReservationCreneauxComponent implements OnInit {
                         if(data.immatriculation == firstImmatriculation ){
                             this.listJours.push(data.jour);
                         }
-                        
-                        
-                        
                         
                     }
                 }

@@ -11,24 +11,21 @@
 
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title">Etape 1 : Vérifiez les disponibilités de votre créneau</h3>
-    </div>
-    <div class="panel-body">
-        <reservation-creneaux>Chargement des créneaux...</reservation-creneaux>
-    </div>
-</div>
-
-<br />
-
-<div class="panel panel-success">
-    <div class="panel-heading">
-        <h3 class="panel-title">Etape 2 : Remplir le formulaire</h3>
+        <h3 class="panel-title">Effectuer une réservation</h3>
     </div>
     <div class="panel-body">
     
         <form (ngSubmit)="addReservation()" [formGroup]="reservationForm" novalidate>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12 col-xs-12">
+                <label for="ville" class="col-md-12 col-xs-12">Ville de départ</label>
+                <select id="ville" class="col-md-3 col-xs-3" size="2" formControlName="ville" >
+                    <option value="Nantes" selected>Nantes</option>
+                    <option value="Niort">Niort</option>
+                </select> 
+            </div>
+            
+            <div class="form-group col-md-6 col-xs-6">
                 <label for="dateDebut">Date début réservation</label>
                 <my-datepicker 
                         formControlName="dateDebut"
@@ -37,8 +34,7 @@
                 </my-datepicker>
             </div>        
 
-
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 col-xs-6">
                 <label for="dateFin">Date fin réservation</label>
                 <my-datepicker
                         formControlName="dateFin"
@@ -73,13 +69,14 @@
                         </li>
                     </ul>
                 </a>
-            </div>             
+            </div>    
+            
             <div *ngIf="vehiculeDispo==null&&vehiculeDispo!==undefined" class="list-group col-md-6 col-xs-12">
                 <a  class="list-group-item"> 
                     <h4>Aucun véhicule disponible pour ce créneau</h4>
                 </a>
             </div>  
-            <div class="form-group col-md-12" >
+            <div class="form-group col-md-12 col-xs-12" >
                 <button type="submit" class="btn btn-success" 
                     [disabled]="!reservationForm.valid">
                     Valider

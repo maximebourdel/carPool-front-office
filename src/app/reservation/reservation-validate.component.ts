@@ -28,13 +28,13 @@ export class ReservationValidateComponent implements OnInit {
     
     ngOnInit(): void { 
         //Met la navbar reservation-create en active
-        document.getElementById('nav-reservation-validate').setAttribute('class','active');
+        document.getElementById('nav-reservation-admin').setAttribute('class','active');
         this.getListReservation();
     }
 
     ngOnDestroy(): void { 
         //Met la navbar reservation-create en inactive
-        document.getElementById('nav-reservation-validate').removeAttribute('class');
+        document.getElementById('nav-reservation-admin').removeAttribute('class');
     } 
 
            

@@ -30,12 +30,16 @@ export class VehiculeService {
                    .map( this.extractData );      
     }
     
-    getVehiculeDispo (dateDebut: string, dateFin: string): Observable<Vehicule> {
+    getVehiculeDispo (dateDebut: string, dateFin: string, ville: string)
+        : Observable<Vehicule> {
         
         let url = this.baseUrl + 'auth/vehicules/dispos';
 
-        return this.authHttp.post(url, {'dateDebut':dateDebut,'dateFin':dateFin})
-                   .map( res => this.extractData(res) )   
+        return this.authHttp.post(url, {
+                    'dateDebut':dateDebut
+                    ,'dateFin':dateFin
+                    , 'ville': ville
+                }).map( res => this.extractData(res) );
     }
 
     private extractData(res: Response) {

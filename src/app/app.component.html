@@ -21,6 +21,11 @@
                     <i class="fa fa-home" aria-hidden="true"></i> Home
                 </a>
             </li>
+            <li id="nav-creneaux">
+                <a [routerLink]="['reservation/creneaux']">
+                    <i class="fa fa-road" aria-hidden="true"></i> Créneaux véhicules
+                </a>
+            </li>
             <li id="nav-my-liste-reservation">
                 <a [routerLink]="['reservation/myList']">
                     <i class="fa fa-calendar" aria-hidden="true"></i> Mes réservations
@@ -31,16 +36,25 @@
                     <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Nouvelle réservation
                 </a>
             </li>
-            <li  *ngIf="isAdmin()" id="nav-reservation-validate" >
-                <a [routerLink]="['reservation/administration']">
-                    <i class="fa fa-key" aria-hidden="true"></i> Administration
+            <li *ngIf="isAdmin()" id="nav-reservation-admin" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Administration 
+                        <span class="caret"></span>
                 </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a [routerLink]="['vehicule']">
+                            <i class="fa fa-car" aria-hidden="true"></i> Liste véhicules 
+                        </a> 
+                    </li>
+                    <li>
+                        <a [routerLink]="['reservation/administration']">
+                            <i class="fa fa-key" aria-hidden="true"></i> Réservations
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li *ngIf="isAdmin()" id="nav-vehicule">
-                <a [routerLink]="['vehicule']">
-                    <i class="fa fa-car" aria-hidden="true"></i> Liste véhicules 
-                </a>
-            </li>
+
         </ul>
         
         <ul class="nav navbar-nav pull-right">
