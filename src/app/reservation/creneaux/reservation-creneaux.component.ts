@@ -1,6 +1,8 @@
 import {Component, OnInit, OnDestroy }  from '@angular/core';
 import { FormBuilder, FormGroup }       from '@angular/forms';
- 
+
+import { Router }                       from '@angular/router'; 
+
 import { Reservation }                  from '../reservation';
 import { ReservationService }           from '../reservation.service';
 
@@ -26,6 +28,7 @@ export class ReservationCreneauxComponent implements OnInit, OnDestroy {
     constructor (
         private reservationService: ReservationService,
         private formBuilder: FormBuilder,
+        private router: Router,
     ) { 
         this.createForm();
     }
@@ -113,5 +116,10 @@ export class ReservationCreneauxComponent implements OnInit, OnDestroy {
                     }
                 }
             )
+        ;
+    }
+    
+    gotoCreate(): void {
+        this.router.navigate(['reservation/new']);
     }
 }
