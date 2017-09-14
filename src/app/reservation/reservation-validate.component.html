@@ -22,11 +22,11 @@
                 <td>{{ reservation.vehicule.immatriculation }} - {{ reservation.vehicule.marque }}</td>
                 <td>{{ reservation.statut }}</td>
                 <th>
-                    <button *ngIf="reservation.statut == 'En cours de modération'" type="button" class="btn btn-success" 
+                    <button *ngIf="reservation.statut == 'En cours d\'administration'" type="button" class="btn btn-success" 
                         (click)="putStatutReservation(reservation,'Confirmée','Validation de réservation envoyée.')">
                         Confirmer
                     </button>
-                    <button *ngIf="reservation.statut == 'En cours de modération'" type="button" class="btn btn-danger" 
+                    <button *ngIf="reservation.statut != 'Annulée'" type="button" class="btn btn-danger" 
                         (click)="putStatutReservation(reservation,'Annulée','Annulation de réservation envoyée.')">
                         Annuler
                     </button>

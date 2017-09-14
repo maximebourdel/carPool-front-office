@@ -27,7 +27,7 @@
                 <td>{{ reservation.vehicule.immatriculation }} - {{ reservation.vehicule.marque }}</td>
                 <td>{{ reservation.statut }}</td>
                 <th>
-                    <button *ngIf="reservation.statut == 'En cours de modération'" type="button" class="btn btn-danger" 
+                    <button *ngIf="reservation.statut != 'Annulé'" type="button" class="btn btn-danger" 
                         (click)="cancelReservation(reservation)">
                         Annuler
                     </button>

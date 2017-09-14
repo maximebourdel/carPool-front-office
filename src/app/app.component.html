@@ -21,11 +21,6 @@
                     <i class="fa fa-home" aria-hidden="true"></i> Home
                 </a>
             </li>
-            <li id="nav-my-liste-reservation">
-                <a [routerLink]="['reservation/myList']">
-                    <i class="fa fa-road" aria-hidden="true"></i> Mes réservations
-                </a>
-            </li>
             <li id="nav-creneaux">
                 <a [routerLink]="['reservation/creneaux']">
                     <i class="fa fa-calendar" aria-hidden="true"></i> Créneaux réservations
@@ -34,6 +29,11 @@
             <li id="nav-reservation-create">
                 <a [routerLink]="['reservation/new']">
                     <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Nouvelle réservation
+                </a>
+            </li>
+            <li id="nav-my-liste-reservation">
+                <a [routerLink]="['reservation/myList']">
+                    <i class="fa fa-road" aria-hidden="true"></i> Mes réservations
                 </a>
             </li>
             <li *ngIf="isAdmin()" id="nav-reservation-admin" class="dropdown">
@@ -70,7 +70,7 @@
                 </a>
             </li>
             <li *ngIf="hasAuthToken()">
-                <a (click)="logout()">
+                <a [routerLink]="['']" (click)="logout()">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
                     <b>Logout</b>
                 </a>

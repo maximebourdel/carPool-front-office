@@ -18,7 +18,6 @@ import { VehiculeListComponent }            from './vehicule/vehicule-list.compo
 import { VehiculeDetailComponent }          from './vehicule/vehicule-detail.component';
 import { VehiculeService }                  from './vehicule/vehicule.service';
 
-import { ReservationListComponent }         from './reservation/reservation-list.component';
 import { ReservationMyListComponent }       from './reservation/reservation-my-list.component';
 import { ReservationCreateComponent }       from './reservation/reservation-create.component';
 import { ReservationValidateComponent }     from './reservation/reservation-validate.component';
@@ -54,7 +53,6 @@ export function highchartsFactory() {
             AuthenticationComponent,
             VehiculeListComponent,
             VehiculeDetailComponent,
-            ReservationListComponent,
             ReservationMyListComponent,
             ReservationCreateComponent,
             ReservationValidateComponent,

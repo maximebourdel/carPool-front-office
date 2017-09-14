@@ -87,7 +87,7 @@ export class ReservationCreateComponent implements OnInit {
         this.reservation.email = userAttributes['username'];
         this.reservation.nom = userAttributes['nom'];
         this.reservation.prenom = userAttributes['prenom'];
-        this.reservation.statut = 'En cours de modération';
+        this.reservation.statut = "En cours d'administration";
         this.reservation.date_debut = this.reservationForm.value.dateDebut;
         this.reservation.date_fin = this.reservationForm.value.dateFin;
         
@@ -102,7 +102,7 @@ export class ReservationCreateComponent implements OnInit {
                     this.gotoListReservation();
                     //Message flash
                     this._flashMessagesService.show(
-                        'Réservation en cours de modération !'
+                        "Réservation en cours d'administration !"
                         , { cssClass: 'alert-info', timeout: 3500 }
                     );
                 }

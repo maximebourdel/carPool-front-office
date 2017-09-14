@@ -54,6 +54,11 @@ export class ReservationMyListComponent implements OnInit {
     }
     
     cancelReservation (reservation: Reservation) {
+        //On demande à l'utilisateur si il est certain de son choix
+        if ( confirm('Voulez vous vraiment annuler cette réservation ?') == false ){
+            return;
+        }
+        
         reservation.statut= "Annulée";
         
         this.reservationService.putStatutReservation(reservation)

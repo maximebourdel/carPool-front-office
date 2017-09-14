@@ -47,8 +47,16 @@ export class ReservationValidateComponent implements OnInit {
     }
     
     putStatutReservation (reservation: Reservation, statut: string, message: string) {
-        reservation.statut= statut;
         
+        //On demande à l'utilisateur si il est certain de son choix quand il annule une résa
+        if (statut=='Annulée'){
+            if(confirm('Voulez vous vraiment annuler cette réservation ?')==false) {
+                return;
+            }
+        }
+        //Alors on change la valeur du formulaire
+        reservation.statut= statut;
+        //Puis on envoie au serveur
         this.reservationService.putStatutReservation(reservation)
             .subscribe(
                 () => {
