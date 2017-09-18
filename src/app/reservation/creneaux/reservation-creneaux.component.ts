@@ -87,35 +87,43 @@ export class ReservationCreneauxComponent implements OnInit, OnDestroy {
                     let apiListCreneauxByAnneeMoisLenght = apiListCreneauxByAnneeMois.length
                     //sert a detecter le changement d'immatriculation
                     let firstImmatriculation = apiListCreneauxByAnneeMois[0]['immatriculation'];
-
+                    //Stocke l'immatriculation précédente
                     let immatriculationPrec = firstImmatriculation;
-
-                    list.push(immatriculationPrec);
+                    //On stocke le premier elément de la liste
+                    list.push([immatriculationPrec]);
+                    
                     for (let data of apiListCreneauxByAnneeMois ){
                         //on incrémente le compteur 
-                        cpt++;immatriculationPrec
+                        cpt++;
                         //changement de vehicule
                         if(immatriculationPrec != data.immatriculation ) {
                             immatriculationPrec = data.immatriculation;
                             this.listCreneauxByAnneeMois.push(list);
                             list = new Array();
-                            list.push(data.immatriculation);
+                            list.push([data.immatriculation]);
                             
                         //dernier element de la liste
                         } 
-                        //dans tous les cas on insere le boolean
-                        list.push(data.is_reserve);
                         
+                        //On insère le tooltip en elément 2 du tableau
+                        let tooltip = data.nom == undefined 
+                            ? 'Disponible'  //pas de réservation pour ce créneau
+                            : 'Réservé par ' + data.nom + ' ' + data.prenom;
+                        //dans tous les cas on insere le boolean
+                        list.push([data.is_reserve, tooltip ]);
+                        
+                        //Cas ou on arrive à la fin de la ligne
                         if (apiListCreneauxByAnneeMoisLenght == cpt) {
                             this.listCreneauxByAnneeMois.push(list);
                         }
+                        
                         if(data.immatriculation == firstImmatriculation ){
                             this.listJours.push(data.jour);
                         }
                         
                     }
                 }
-            )
+            );
         ;
     }
     

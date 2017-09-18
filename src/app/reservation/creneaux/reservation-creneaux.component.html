@@ -51,10 +51,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let creneauxByAnneeMois of listCreneauxByAnneeMois">
-                <td *ngFor="let elem of creneauxByAnneeMois" 
-                    [style.background]="color(elem)"
-                >
-                    {{elem == 0 || elem == 1 ? '' : elem}}
+                <td *ngFor="let elem of creneauxByAnneeMois"  data-toggle="tooltip" title="{{ elem[1]}}" 
+                    [style.background]="color(elem[0])"
+                > 
+                    {{elem[0] == 0 || elem[0] == 1 ? '' : elem[0]}}
                 </td>
             </tr>
         </tbody>
