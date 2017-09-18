@@ -53,8 +53,9 @@
             <tr *ngFor="let creneauxByAnneeMois of listCreneauxByAnneeMois">
                 <td *ngFor="let elem of creneauxByAnneeMois" 
                     [style.background]="color(elem)"
-                    
-                >{{elem == 0 || elem == 1 ? '' : elem}}</td>
+                >
+                    {{elem == 0 || elem == 1 ? '' : elem}}
+                </td>
             </tr>
         </tbody>
     </table>

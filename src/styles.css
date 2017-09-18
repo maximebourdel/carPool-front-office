@@ -1,8 +1,9 @@
 /*  Style pour les formulaires */
-.ng-valid[required], .ng-valid.required  {
+.ng-valid[required]
+, .ng-valid.required  {
     border-left: 5px solid lightgreen; /* green */
 }
-.ng-invalid:not(form)  {
+.ng-invalid:not(form):not(my-datepicker)  {
     border-left: 5px solid salmon; /* red */
 }
 

@@ -131,8 +131,8 @@ export class ReservationCreateComponent implements OnInit {
         //initialise les éléments du formulaire
         this.reservationForm = this.fb.group({ 
              ville:         ['Nantes', Validators.required ]
-            , dateDebut:    ['', Validators.minLength(10) ]
-            , dateFin:      ['', Validators.minLength(10) ]
+            , dateDebut:    ['', Validators.required ]
+            , dateFin:      ['', Validators.required ]
             
         });
         //Active le suivi de date début et date_fin
