@@ -87,10 +87,12 @@ export class ReservationCreneauxComponent implements OnInit, OnDestroy {
                     let apiListCreneauxByAnneeMoisLenght = apiListCreneauxByAnneeMois.length
                     //sert a detecter le changement d'immatriculation
                     let firstImmatriculation = apiListCreneauxByAnneeMois[0]['immatriculation'];
+                    
                     //Stocke l'immatriculation précédente
                     let immatriculationPrec = firstImmatriculation;
                     //On stocke le premier elément de la liste
                     list.push([immatriculationPrec]);
+                    list.push([apiListCreneauxByAnneeMois[0]['ville']]);
                     
                     for (let data of apiListCreneauxByAnneeMois ){
                         //on incrémente le compteur 
@@ -101,6 +103,7 @@ export class ReservationCreneauxComponent implements OnInit, OnDestroy {
                             this.listCreneauxByAnneeMois.push(list);
                             list = new Array();
                             list.push([data.immatriculation]);
+                            list.push([data.ville]);
                             
                         //dernier element de la liste
                         } 
