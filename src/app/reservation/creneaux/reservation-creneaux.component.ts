@@ -106,7 +106,7 @@ export class ReservationCreneauxComponent implements OnInit, OnDestroy {
                         } 
                         
                         //On insère le tooltip en elément 2 du tableau
-                        let tooltip = data.nom == undefined 
+                        let tooltip = data.nom == '' 
                             ? 'Disponible'  //pas de réservation pour ce créneau
                             : 'Réservé par ' + data.nom + ' ' + data.prenom;
                         //dans tous les cas on insere le boolean
