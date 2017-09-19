@@ -33,17 +33,8 @@ import { JwtHelper }                        from 'angular2-jwt';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-declare var require : any;
-
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
-}
-
-export function highchartsFactory() {
-    const hc = require('highcharts/highstock');
-    const dd = require('highcharts/modules/exporting');
-    dd(hc);
-    return hc;
 }
 
 @NgModule({
@@ -73,15 +64,15 @@ export function highchartsFactory() {
             provide: AuthHttp,
             useFactory: authHttpServiceFactory,
             deps: [ Http, RequestOptions ]
-        }, 
+        },
         AuthAdminGuard,
         AuthGuard, 
         AuthenticationService,
         VehiculeService,
         ReservationService,
         {
-                provide: LocationStrategy
-                , useClass: HashLocationStrategy
+            provide: LocationStrategy
+            , useClass: HashLocationStrategy
         },
         JwtHelper
     ],

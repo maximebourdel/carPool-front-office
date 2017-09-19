@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component }                            from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+//Gestion des formulaires
+import { FormGroup, FormBuilder , Validators}   from '@angular/forms';
+
+import { Router, ActivatedRoute }               from '@angular/router';
  
-import { AuthenticationService } from './authentication.service';
-
-import { JwtHelper } from 'angular2-jwt';
+import { AuthenticationService }                from './authentication.service';
 
 @Component({
   selector: 'app-authentication',
+  providers: [AuthenticationService],
   templateUrl: './authentication.component.html'
 })
 export class AuthenticationComponent {
@@ -16,35 +17,37 @@ export class AuthenticationComponent {
     returnUrl: string;
     loginForm: FormGroup;
     error: string = '';
-
  
-    constructor(
-        private jwtHelper: JwtHelper,
-        private formBuilder: FormBuilder, 
+    constructor( 
         private authenticationService: AuthenticationService, 
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private fb: FormBuilder,
     ) {
-        this.loginForm = formBuilder.group({
-                'username': ['', Validators.required],
-                'password': ['', Validators.required]
-        });
+        //Initialisation du formulaire
+        this.createForm();
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
  
-	onSubmit() {
-            this.authenticationService
-                    .authenticate(this.loginForm.value)
-                    .subscribe(
-                data => { 
-                    localStorage.setItem('token', data.token);
-                    //localStorage.setItem('email', data.user_values.email);
-                    //localStorage.setItem('nom', data.user_values.nom);
-                    //localStorage.setItem('prenom', data.user_values.prenom);
-                    this.router.navigate([this.returnUrl]);
-                },
-                () => this.error = 'Mauvais login ou mot de passe'
-            );
-	}
+    onSubmit() {
+        this.authenticationService
+                .authenticate(this.loginForm.value)
+                .subscribe(
+            data => { 
+                localStorage.setItem('token', data.token);
+                this.router.navigate([this.returnUrl]);
+            },
+            () => this.error = 'Mauvais login ou mot de passe'
+        );
+    }
+    
+    createForm() {
+        //initialise les éléments du formulaire
+        this.loginForm = this.fb.group({ 
+            'username': ['', Validators.required],
+            'password': ['', Validators.required]
+
+        });    
+    }
 
 }

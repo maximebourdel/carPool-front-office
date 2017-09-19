@@ -1,4 +1,4 @@
-import { Component, OnInit}                     from '@angular/core';
+import { Component, OnInit }                    from '@angular/core';
 //Pour gérer les redirections
 import { Router }                               from '@angular/router';
 //Gestion des formulaires
@@ -21,7 +21,6 @@ import { JwtHelper }                            from 'angular2-jwt';
 })
 export class ReservationCreateComponent implements OnInit {
 
-    
     errorMessage: string;
     reservation: Reservation = new Reservation ();
     listVehicule: Vehicule[];
@@ -53,7 +52,6 @@ export class ReservationCreateComponent implements OnInit {
     } 
 
     getListVehicule() {
-        
         this.vehiculeService.getListVehicule()
             .subscribe(
                 listVehicule => this.listVehicule = listVehicule,
@@ -77,7 +75,6 @@ export class ReservationCreateComponent implements OnInit {
     }
 
     addReservation(): void { 
-        
         //On vérifie que le formulaire n'est pas vide
         if (!this.reservationForm) { return; }
         
@@ -91,8 +88,7 @@ export class ReservationCreateComponent implements OnInit {
         this.reservation.date_debut = this.reservationForm.value.dateDebut;
         this.reservation.date_fin = this.reservationForm.value.dateFin;
         
-        this.reservation.vehicule = this.vehiculeDispo;   
-        
+        this.reservation.vehicule = this.vehiculeDispo;
         
         this.reservationService
             .createReservation(this.reservation)
@@ -118,8 +114,8 @@ export class ReservationCreateComponent implements OnInit {
                  
             } else {
                 this._flashMessagesService.show(
-                        'Dates non conformes !'
-                        , { cssClass: 'alert-danger', timeout: 3500 }
+                    'Dates non conformes !'
+                    , { cssClass: 'alert-danger', timeout: 3500 }
                 );
                 //on n'affiche plus le vehicule
                 this.vehiculeDispo=undefined;
@@ -139,9 +135,9 @@ export class ReservationCreateComponent implements OnInit {
         let nameControl = this.reservationForm.valueChanges;
         nameControl.forEach(
             (value) => this.checkDatesReservation(
-                    value.dateDebut
-                    , value.dateFin
-                    , value.ville
+                value.dateDebut
+                , value.dateFin
+                , value.ville
             )
         );        
     }
