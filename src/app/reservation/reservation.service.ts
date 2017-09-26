@@ -7,6 +7,9 @@ import { Observable }   from 'rxjs/Observable';
 
 import { environment }  from '../../environments/environment';
 
+//pour le décryptage du token
+import { JwtHelper }                    from 'angular2-jwt';
+
 
 @Injectable()
 export class ReservationService {
@@ -14,7 +17,10 @@ export class ReservationService {
     baseUrl: string = 'http://' + environment.API_PATH;
     
            
-    constructor (private authHttp: AuthHttp) {}
+    constructor (
+        private jwtHelper: JwtHelper
+        ,private authHttp: AuthHttp
+    ) {}
  
     getListReservation (): Observable<Reservation[]> {
         
@@ -50,7 +56,17 @@ export class ReservationService {
 
     putStatutReservation (reservation : Reservation): Observable<Reservation> {
         
-        let url = this.baseUrl + 'auth/reservation/statut';        
+        let url = this.baseUrl + 'admin/reservation/statut';
+        
+        return this.authHttp
+            .put( url, {'id':reservation.id,'statut':reservation.statut} )
+            .map( res => this.extractData(res) )
+        ;
+    }
+    
+    cancelReservation (reservation : Reservation): Observable<Reservation> {
+        
+        let url = this.baseUrl + 'auth/reservation/cancel';
         
         return this.authHttp
             .put( url, {'id':reservation.id,'statut':reservation.statut} )
@@ -81,5 +97,5 @@ export class ReservationService {
     private extractData(res: Response) {
         let body = res.json();
         return body || { };
-    }
+    }    
 }

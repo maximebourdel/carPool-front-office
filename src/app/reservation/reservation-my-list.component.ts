@@ -61,7 +61,7 @@ export class ReservationMyListComponent implements OnInit {
         
         reservation.statut= "Annulée";
         
-        this.reservationService.putStatutReservation(reservation)
+        this.reservationService.cancelReservation(reservation)
             .subscribe(
                 () => {
                     //on la retire de la liste
