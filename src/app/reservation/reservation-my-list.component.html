@@ -1,46 +1,125 @@
-
-<button type="button" class="btn btn-success" 
+  <button type="button" class="btn btn-success" 
     (click)="gotoCreate()">
     <i class="fa fa-plus" aria-hidden="true"></i>
     Effectuer une réservation 
-</button>
+    </button>
+  
+  
+    <div>
+        <h3>
+            Liste complète des réservations de {{ prenomUtilisateur }} {{ nomUtilisateur }}
+        </h3>
+            <small>
+            <a  (click)="table.rowDetail.expandAllRows()">Tout développer</a> | 
+            <a  (click)="table.rowDetail.collapseAllRows()">Tout réduire</a>
+            </small>
+      
+        <ngx-datatable
+            #myTable
+            class="material"
+            [rows]="myListReservations"
+            [loadingIndicator]="loadingIndicator"
+            [columns]="columns"
+            [scrollbarH]="true"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [limit]="10"
+            [rowHeight]="'auto'"
+            [reorderable]="'true'"
+            [rowClass]="getRowClass"
+        >
+    
+            <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow >
+              
+              <ng-template let-row="row" let-expanded="expanded" class="col-md-12 col-xs-12" ngx-datatable-row-detail-template>
+                
+                <div style="padding-left:35px;">
+                    
+                    <div *ngIf="row.statut == 'Confirmée'" class="progress">
+                      <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 33.33%">
+                        <span class="sr-only"></span>En cours d'administration
+                      </div>
+                      <div class="progress-bar progress-bar-default progress-bar-striped active" style="width: 33.33%">
+                        <span class="sr-only"></span>Confirmée
+                      </div>
+                      <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 0%">
+                        <span class="sr-only"></span>
+                      </div>
+                    </div> 
+                    <div *ngIf="row.statut == 'En cours d\'administration'" class="progress">
+                      <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 33.33%">
+                        <span class="sr-only"></span>En cours d'administration
+                      </div>
+                      <div class="progress-bar progress-bar-default progress-bar-striped" style="width: 0%">
+                        <span class="sr-only"></span>
+                      </div>
+                      <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 0%">
+                        <span class="sr-only"></span>
+                      </div>
+                    </div>
+                    
+                    
+                </div>
+                
+              </ng-template>
+              
+            </ngx-datatable-row-detail>
+    
+    
+            <ngx-datatable-column
+              [width]="50"
+              [resizeable]="false"
+              [sortable]="false"
+              [draggable]="false"
+              [canAutoResize]="false">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                  [class.datatable-icon-right]="!expanded"
+                  [class.datatable-icon-down]="expanded"
+                  title="Expand/Collapse Row"
+                  (click)="toggleExpandRow(row)">
+                </a>
+              </ng-template>
+            </ngx-datatable-column>    
+    
+
+       
+            <ngx-datatable-column name="Date début" [sortable]="false" >
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                    {{ row.date_debut | amDateFormat: 'YYYY-MM-DD'}}
+                </ng-template>
+            </ngx-datatable-column>
 
 
+            <ngx-datatable-column name="Date fin" [sortable]="false" >
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                    {{ row.date_fin | amDateFormat: 'YYYY-MM-DD'}}
+                </ng-template>
+            </ngx-datatable-column>        
 
-<div  class="col-xs-12 col-md-12">
-    <h3>Liste complète des réservations de {{ prenomUtilisateur }} {{ nomUtilisateur }}</h3>
-    <table *ngIf="listReservation?.length > 0" class="table">
-        <thead>
-            <tr>
-                <th>Date Début résa</th>
-                <th>Date Fin résa</th>
-                <th>Vehicule</th>
-                <th>Statut</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            <tr *ngFor="let reservation of listReservation">
-                <td>{{ reservation.date_debut | amDateFormat: 'YYYY-MM-DD' }}</td>
-                <td>{{ reservation.date_fin | amDateFormat: 'YYYY-MM-DD' }}</td>
-                <td>{{ reservation.vehicule.immatriculation }} - {{ reservation.vehicule.marque }}</td>
-                <td>{{ reservation.statut }}</td>
-                <th>
-                    <button *ngIf="reservation.statut != 'Annulé'" type="button" class="btn btn-danger" 
-                        (click)="cancelReservation(reservation)">
+
+            <ngx-datatable-column name="Vehicule" >
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                    {{row.vehicule.immatriculation}} - {{row.vehicule.marque}}
+                </ng-template>
+            </ngx-datatable-column>
+
+
+            <ngx-datatable-column name="Statut" prop="statut"></ngx-datatable-column>
+
+
+            <ngx-datatable-column name="Action">
+                <ng-template ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex" let-value="value" let-row="row" 
+                    let-group="group">
+                    
+                    <button *ngIf="row.statut != 'Annulé'" type="button" class="btn btn-danger" 
+                        (click)="cancelReservation(row)">
                         Annuler
                     </button>
-                </th>
-            </tr>
+                    
+                </ng-template>                    
+            </ngx-datatable-column>
             
-        </tbody>
-    </table>
-
-    <div *ngIf="listReservation?.length == 0" class="col-xs-12 col-md-12">
-        <h4>Vous n'avez aucune réservation pour le moment.</h4>
+      </ngx-datatable>
     </div>
-    
-</div>
-
-

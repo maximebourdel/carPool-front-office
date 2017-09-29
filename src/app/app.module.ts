@@ -33,6 +33,9 @@ import { JwtHelper }                        from 'angular2-jwt';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
+import { NgxDatatableModule }               from '@swimlane/ngx-datatable';
+
+
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
 }
@@ -48,7 +51,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
             ReservationCreateComponent,
             ReservationValidateComponent,
             ReservationCreneauxComponent,
-            DatePicker,
+            DatePicker
   	],
 	imports: [
 	    BrowserModule,
@@ -57,7 +60,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 	    AppRoutingModule,
             ReactiveFormsModule,
             MomentModule,
-            FlashMessagesModule
+            FlashMessagesModule,
+            NgxDatatableModule
     ],
     providers: [
         {
