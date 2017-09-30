@@ -111,14 +111,24 @@ export class ReservationCreateComponent implements OnInit {
             if (dateDebut <= dateFin) {
                 //On appelle la fonction de recherche d'un véhicule
                 this.getVehiculeDispo(dateDebut, dateFin, ville);
-                 
+                //On dégrise le bouton valider
+                this.reservationForm.controls['dateDebut'].setErrors(null);
+                this.reservationForm.controls['dateFin'].setErrors(null);
             } else {
+                
+               
                 this._flashMessagesService.show(
                     'Dates non conformes !'
                     , { cssClass: 'alert-danger', timeout: 3500 }
                 );
                 //on n'affiche plus le vehicule
                 this.vehiculeDispo=undefined;
+                
+                //On grise le bouton valider
+                this.reservationForm.controls['dateDebut'].setErrors({'incorrect': true});
+                this.reservationForm.controls['dateFin'].setErrors({'incorrect': true});
+
+                
             }  
         }
     }
