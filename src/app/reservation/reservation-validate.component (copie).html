@@ -1,0 +1,45 @@
+<div  class="col-xs-12 col-md-12">
+    <h3>Liste complète des réservations</h3>
+    <table *ngIf="listReservation?.length > 0" class="table">
+        <thead>
+            <tr>
+                <th>Date création</th>
+                <th>Nom prénom</th>
+                <th>Date Début résa</th>
+                <th>Date Fin résa</th>
+                <th>Vehicule</th>
+                <th>Statut</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr *ngFor="let reservation of listReservation">
+                <td>{{ reservation.date_creation | amDateFormat: 'YYYY-MM-DD HH' }}h </td>
+                <td>{{ reservation.nom }} {{ reservation.prenom }}</td>
+                <td>{{ reservation.date_debut | amDateFormat: 'YYYY-MM-DD' }}</td>
+                <td>{{ reservation.date_fin | amDateFormat: 'YYYY-MM-DD' }}</td>
+                <td>{{ reservation.vehicule.immatriculation }} - {{ reservation.vehicule.marque }}</td>
+                <td>{{ reservation.statut }}</td>
+                <th>
+                    <button *ngIf="reservation.statut == 'En cours d\'administration'" type="button" class="btn btn-success" 
+                        (click)="putStatutReservation(reservation,'Confirmée','Validation de réservation envoyée.')">
+                        Confirmer
+                    </button>
+                    <button *ngIf="reservation.statut != 'Annulée'" type="button" class="btn btn-danger" 
+                        (click)="putStatutReservation(reservation,'Annulée','Annulation de réservation envoyée.')">
+                        Annuler
+                    </button>
+                </th>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <div *ngIf="listReservation?.length == 0" class="col-xs-12 col-md-12">
+        <h4>Il n'y a aucune réservation pour le moment.</h4>
+    </div>
+    
+</div>
+
+

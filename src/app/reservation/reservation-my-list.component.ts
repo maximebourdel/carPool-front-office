@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy
 
 import { Router }                       from '@angular/router';
 
+import { Vehicule }                     from '../vehicule/vehicule';
 
 import { Reservation }                  from './reservation';
 import { ReservationService }           from './reservation.service';
@@ -90,7 +91,7 @@ export class ReservationMyListComponent implements OnInit, OnDestroy {
     getRowClass(row) {
         return {
             'bg-warning': row.statut === "En cours d'administration"
-            , 'bg-info': row.statut === "Confirmée" 
+            , 'bg-success': row.statut === "Confirmée" 
             
         };
     }
@@ -98,5 +99,13 @@ export class ReservationMyListComponent implements OnInit, OnDestroy {
     gotoCreate(): void {
         this.router.navigate(['reservation/new']);
     }
+    
+
+    vehiculeSorter(propA: Vehicule, propB: Vehicule) {
+        
+        // Effectue un sorter
+        if (propA.immatriculation.toLowerCase() < propB.immatriculation.toLowerCase()) return -1;
+        if (propA.immatriculation.toLowerCase() > propB.immatriculation.toLowerCase()) return 1;
+    }    
 
 }
