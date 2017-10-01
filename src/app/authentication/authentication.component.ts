@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder , Validators}   from '@angular/forms';
 import { Router, ActivatedRoute }               from '@angular/router';
  
 import { AuthenticationService }                from './authentication.service';
+//Pour le Busy
+import { Subscription }                         from 'rxjs';
 
 @Component({
   selector: 'app-authentication',
@@ -16,7 +18,9 @@ export class AuthenticationComponent {
 	
     returnUrl: string;
     loginForm: FormGroup;
+    busy: Subscription;
     error: string = '';
+    
  
     constructor( 
         private authenticationService: AuthenticationService, 
@@ -30,7 +34,7 @@ export class AuthenticationComponent {
     }
  
     onSubmit() {
-        this.authenticationService
+        this.busy = this.authenticationService
                 .authenticate(this.loginForm.value)
                 .subscribe(
             data => { 
