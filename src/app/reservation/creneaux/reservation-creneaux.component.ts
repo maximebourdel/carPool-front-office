@@ -6,6 +6,8 @@ import { Router }                       from '@angular/router';
 import { Reservation }                  from '../reservation';
 import { ReservationService }           from '../reservation.service';
 
+import { Subscription } from 'rxjs';
+
 @Component({
     selector: 'reservation-creneaux',
     templateUrl: 'reservation-creneaux.component.html',
@@ -17,7 +19,7 @@ export class ReservationCreneauxComponent implements OnInit, OnDestroy {
     dateToday= new Date();
     mm = this.dateToday.getUTCMonth()+1; //Janvier = 0!
     yyyy = this.dateToday.getFullYear();
-    
+    busy: Subscription;
     
     //variables pour listCreneauxByAnneeMois
     datesForm: FormGroup;
@@ -70,7 +72,7 @@ export class ReservationCreneauxComponent implements OnInit, OnDestroy {
     getCreneauxByAnneeMois(): void {   
         this.datesForm.value;      
         if (!this.datesForm.value) { return; }
-        this.reservationService
+        this.busy =  this.reservationService
             .getCreneauxByAnneeMois(this.datesForm.value)
             .subscribe(
                 (apiListCreneauxByAnneeMois) => {

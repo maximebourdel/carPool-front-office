@@ -14,7 +14,9 @@
         <h3 class="panel-title">Effectuer une réservation</h3>
     </div>
     <div  class="panel-body">
-    
+        
+        <div [ngBusy]="busy"></div>
+
         <form (ngSubmit)="addReservation()" [formGroup]="reservationForm" novalidate>
 
             <div class="form-group col-md-12 col-xs-12">
@@ -42,8 +44,8 @@
                 >
                 </my-datepicker>
                 
-            </div>        
-            
+            </div>
+        
             <div *ngIf="vehiculeDispo!==undefined&&vehiculeDispo!==null" class="list-group col-md-6 col-xs-12">
                 <h4>Voici le véhicule qui vous sera alloué</h4>
                 <a class="list-group-item">    

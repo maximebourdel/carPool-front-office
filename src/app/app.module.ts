@@ -35,6 +35,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { NgxDatatableModule }               from '@swimlane/ngx-datatable';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BusyModule} from 'angular2-busy';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
@@ -61,7 +63,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
             ReactiveFormsModule,
             MomentModule,
             FlashMessagesModule,
-            NgxDatatableModule
+            NgxDatatableModule,
+            BrowserAnimationsModule,
+            BusyModule
     ],
     providers: [
         {

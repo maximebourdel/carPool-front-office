@@ -5,7 +5,7 @@
 </button>
 
 <div class="col-xs-12 col-md-12">
-
+    
     <h3>Créneaux par véhicules</h3>
     <form [formGroup]="datesForm" (ngSubmit)="getCreneauxByAnneeMois()" >    
         
@@ -41,7 +41,7 @@
     
 </div>
 <div class="col-xs-12 col-md-12">
-    
+    <div [ngBusy]="busy"></div>
     <table class="table" *ngIf="listCreneauxByAnneeMois" id="tableReservation">
         <thead>
             <tr>
