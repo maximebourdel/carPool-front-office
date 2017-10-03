@@ -25,7 +25,6 @@ export class ReservationCreateComponent implements OnInit {
 
     errorMessage: string;
     reservation: Reservation = new Reservation ();
-    listVehicule: Vehicule[];
     vehiculeDispo: Vehicule;
     reservationForm: FormGroup;
     dateValid: string = 'false';
@@ -46,20 +45,11 @@ export class ReservationCreateComponent implements OnInit {
     ngOnInit(): void { 
         //Met la navbar reservation-create en active
         document.getElementById('nav-reservation-create').setAttribute('class','active');
-        this.getListVehicule();
     }
 
     ngOnDestroy(): void { 
         //Met la navbar reservation-create en inactive
         document.getElementById('nav-reservation-create').removeAttribute('class');
-    } 
-
-    getListVehicule() {
-        this.vehiculeService.getListVehicule()
-            .subscribe(
-                listVehicule => this.listVehicule = listVehicule,
-                error =>  this.errorMessage = <any>error,
-            );
     }
     
     getVehiculeDispo(dateDebut: string, dateFin: string, ville: string) {
@@ -119,7 +109,6 @@ export class ReservationCreateComponent implements OnInit {
                 this.reservationForm.controls['dateFin'].setErrors(null);
             } else {
                 
-               
                 this._flashMessagesService.show(
                     'Dates non conformes !'
                     , { cssClass: 'alert-danger', timeout: 3500 }
@@ -130,8 +119,6 @@ export class ReservationCreateComponent implements OnInit {
                 //On grise le bouton valider
                 this.reservationForm.controls['dateDebut'].setErrors({'incorrect': true});
                 this.reservationForm.controls['dateFin'].setErrors({'incorrect': true});
-
-                
             }  
         }
     }
