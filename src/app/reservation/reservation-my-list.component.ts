@@ -100,6 +100,9 @@ export class ReservationMyListComponent implements OnInit, OnDestroy {
         this.router.navigate(['reservation/new']);
     }
     
+    goToCreateFeedback(reservation: Reservation): void {
+        this.router.navigate(['reservation/feedback/' + reservation.id]);
+    }
 
     vehiculeSorter(propA: Vehicule, propB: Vehicule) {
         

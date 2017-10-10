@@ -59,17 +59,17 @@
         
         <ul class="nav navbar-nav pull-right">
 
-            <li *ngIf="hasAuthToken()">
+            <li *ngIf="hasAuthTokenValid()">
                 <a>{{ prenomUtilisateur }} {{ nomUtilisateur }}</a>
             </li>
             
-            <li *ngIf="!hasAuthToken()">
+            <li *ngIf="!hasAuthTokenValid()">
                 <a [routerLink]="['login']">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
                     <b>Login</b>
                 </a>
             </li>
-            <li *ngIf="hasAuthToken()">
+            <li *ngIf="hasAuthTokenValid()">
                 <a [routerLink]="['']" (click)="logout()">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
                     <b>Logout</b>

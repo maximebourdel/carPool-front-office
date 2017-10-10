@@ -32,31 +32,43 @@
               
             <ng-template let-row="row" let-expanded="expanded" class="col-md-12 col-xs-12" ngx-datatable-row-detail-template>
 
-              <div style="padding-left:35px;">
+                <div style="padding-left:35px;">
 
-                <div *ngIf="row.statut == 'Confirmée'" class="progress">
-                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 33.33%">
-                        <span class="sr-only"></span>En cours d'administration
+                    <div *ngIf="row.statut == 'En cours d\'administration'" class="progress">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 33.33%">
+                            <span class="sr-only"></span>En cours d'administration
+                        </div>
+                        <div class="progress-bar progress-bar-default progress-bar-striped" style="width: 0%">
+                            <span class="sr-only"></span>
+                        </div>
+                        <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 0%">
+                            <span class="sr-only"></span>
+                        </div>
                     </div>
-                    <div class="progress-bar progress-bar-default progress-bar-striped active" style="width: 33.33%">
-                        <span class="sr-only"></span>Confirmée
+
+                    <div *ngIf="row.statut == 'Confirmée'" class="progress">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 33.33%">
+                            <span class="sr-only"></span>En cours d'administration
+                        </div>
+                        <div class="progress-bar progress-bar-default progress-bar-striped active" style="width: 33.33%">
+                            <span class="sr-only"></span>Confirmée
+                        </div>
+                        <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 0%">
+                            <span class="sr-only"></span>
+                        </div>
                     </div>
-                    <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 0%">
-                        <span class="sr-only"></span>
+
+                    <div *ngIf="row.statut == 'Terminée'" class="progress">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 33.33%">
+                            <span class="sr-only"></span>En cours d'administration
+                        </div>
+                        <div class="progress-bar progress-bar-default progress-bar-striped" style="width: 33.33%">
+                            <span class="sr-only"></span>Confirmée
+                        </div>
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: 33.34%">
+                            <span class="sr-only"></span>Terminée
+                        </div>
                     </div>
-                </div>
-                  
-                <div *ngIf="row.statut == 'En cours d\'administration'" class="progress">
-                    <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 33.33%">
-                        <span class="sr-only"></span>En cours d'administration
-                    </div>
-                    <div class="progress-bar progress-bar-default progress-bar-striped" style="width: 0%">
-                        <span class="sr-only"></span>
-                    </div>
-                    <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 0%">
-                        <span class="sr-only"></span>
-                    </div>
-                </div>
 
                 </div>
 
@@ -113,10 +125,15 @@
                 let-row="row" let-rowIndex="rowIndex" let-group="group"
             >
 
-                <button *ngIf="row.statut != 'Annulé'" 
+                <button *ngIf="row.statut != 'Annulé' && row.statut != 'Terminée'" 
                     type="button" class="btn btn-danger" 
                     (click)="cancelReservation(row)">
                     Annuler
+                </button>
+                <button *ngIf="row.is_feedbackable == true && row.feedback == null" 
+                    type="button" class="btn btn-info" 
+                    (click)="goToCreateFeedback(row)">
+                    Feedback
                 </button>
 
             </ng-template>                    

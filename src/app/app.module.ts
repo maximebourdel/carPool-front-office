@@ -22,8 +22,10 @@ import { ReservationMyListComponent }       from './reservation/reservation-my-l
 import { ReservationCreateComponent }       from './reservation/reservation-create.component';
 import { ReservationValidateComponent }     from './reservation/reservation-validate.component';
 import { ReservationCreneauxComponent }     from './reservation/creneaux/reservation-creneaux.component';
-
 import { ReservationService }               from './reservation/reservation.service';
+
+import { FeedbackCreateComponent }          from './feedback/feedback-create.component';
+import { FeedbackService }                  from './feedback/feedback.service';
 
 import { FlashMessagesModule }              from 'angular2-flash-messages';
 
@@ -53,6 +55,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
             ReservationCreateComponent,
             ReservationValidateComponent,
             ReservationCreneauxComponent,
+            FeedbackCreateComponent,
             DatePicker
   	],
 	imports: [
@@ -78,6 +81,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
         AuthenticationService,
         VehiculeService,
         ReservationService,
+        FeedbackService,
         {
             provide: LocationStrategy
             , useClass: HashLocationStrategy

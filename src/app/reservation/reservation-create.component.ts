@@ -18,13 +18,13 @@ import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'reservation-create',
-    providers: [ReservationService, VehiculeService],
+    providers: [ ReservationService, VehiculeService ],
     templateUrl: 'reservation-create.component.html'
 })
 export class ReservationCreateComponent implements OnInit {
 
     errorMessage: string;
-    reservation: Reservation = new Reservation ();
+    reservation: Reservation = new Reservation();
     vehiculeDispo: Vehicule;
     reservationForm: FormGroup;
     dateValid: string = 'false';
@@ -74,14 +74,14 @@ export class ReservationCreateComponent implements OnInit {
         //on initalise les autres variables 
         var userAttributes = this.jwtHelper.decodeToken(localStorage.getItem('token'));
         
-        this.reservation.email = userAttributes['username'];
+        this.reservation.vehicule = this.vehiculeDispo;
+        this.reservation.feedback = null;
         this.reservation.nom = userAttributes['nom'];
         this.reservation.prenom = userAttributes['prenom'];
-        this.reservation.statut = "En cours d'administration";
         this.reservation.date_debut = this.reservationForm.value.dateDebut;
         this.reservation.date_fin = this.reservationForm.value.dateFin;
-        
-        this.reservation.vehicule = this.vehiculeDispo;
+        this.reservation.email = userAttributes['username'];
+        this.reservation.statut = "En cours d'administration";
         
         this.busy = this.reservationService
             .createReservation(this.reservation)
@@ -131,7 +131,7 @@ export class ReservationCreateComponent implements OnInit {
             , dateFin:      ['', Validators.required ]
             
         });
-        //Active le suivi de date début et date_fin
+        //Active le suivi des modifications de dateDebut, dateFin et ville
         let nameControl = this.reservationForm.valueChanges;
         nameControl.forEach(
             (value) => this.checkDatesReservation(

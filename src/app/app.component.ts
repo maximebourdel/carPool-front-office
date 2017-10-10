@@ -7,6 +7,7 @@ import { JwtHelper } from 'angular2-jwt';
 
 @Component({
   selector: 'app-root',
+  providers: [ AuthenticationService ],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
@@ -21,7 +22,7 @@ export class AppComponent {
         private authenticationService: AuthenticationService
         , private router: Router
     ) {
-        if (this.hasAuthToken()){
+        if (this.hasAuthTokenValid()){
             let userAttributes = this.jwtHelper.decodeToken(localStorage.getItem('token'));
             this.nomUtilisateur = userAttributes['nom'];
             this.prenomUtilisateur = userAttributes['prenom'];
@@ -29,8 +30,8 @@ export class AppComponent {
     
     }
  
-    hasAuthToken() {
-        return localStorage.getItem('token') !== null;
+    hasAuthTokenValid() {
+        return localStorage.getItem('token') !== null && this.authenticationService.loggedIn() ;
     }
  
     logout() {
@@ -38,7 +39,7 @@ export class AppComponent {
     }
     
     isAdmin() {
-        if(this.hasAuthToken()){
+        if(this.hasAuthTokenValid()){
             var userAttributes = this.jwtHelper.decodeToken(localStorage.getItem('token'));
             
             if (userAttributes['roles'][0] === 'ROLE_ADMIN'){

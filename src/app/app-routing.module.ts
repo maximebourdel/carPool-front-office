@@ -13,6 +13,8 @@ import { ReservationMyListComponent }   from './reservation/reservation-my-list.
 import { ReservationCreateComponent }   from './reservation/reservation-create.component';
 import { ReservationValidateComponent } from './reservation/reservation-validate.component';
 
+import { FeedbackCreateComponent }      from './feedback/feedback-create.component';
+
 
 const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -27,6 +29,10 @@ const routes: Routes = [
     { path: 'reservation/new', component: ReservationCreateComponent, canActivate: [AuthGuard] },
     { path: 'reservation/creneaux', component: ReservationCreneauxComponent, canActivate: [AuthGuard] },
     { path: 'reservation/administration', component: ReservationValidateComponent, canActivate: [AuthAdminGuard] },   
+
+    //Pour les feedbacks
+    { path: 'reservation/feedback/:id', component: FeedbackCreateComponent, canActivate: [AuthGuard] },   
+
 
     //Else
     { path: '**', redirectTo: '' }

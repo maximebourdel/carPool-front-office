@@ -30,6 +30,14 @@ export class ReservationService {
                    .map( this.extractData );         
     }
     
+    getReservation (id: number): Observable<Reservation> {
+        
+        let url = this.baseUrl + 'auth/reservations/';
+
+        return this.authHttp.get( url + id )
+                    .map( res => this.extractData(res) )        
+    }
+    
     getMyListReservation (email: string): Observable<Reservation[]> {
         
         let url = this.baseUrl + 'auth/reservations/mies/lists';
@@ -44,15 +52,7 @@ export class ReservationService {
 
         return this.authHttp.get(url)
                    .map( this.extractData );         
-    }   
-
-    getRequete (): Observable<any[]> {
-        
-        let url = this.baseUrl + 'auth/reservation/requete';
-
-        return this.authHttp.get(url)
-                   .map( this.extractData );    
-    } 
+    }
 
     putStatutReservation (reservation : Reservation): Observable<Reservation> {
         
