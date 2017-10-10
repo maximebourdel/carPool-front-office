@@ -130,7 +130,7 @@
                     (click)="cancelReservation(row)">
                     Annuler
                 </button>
-                <button *ngIf="row.is_feedbackable == true && row.feedback == null" 
+                <button *ngIf="row.statut == 'Confirmée' && row.is_feedbackable == 1 && row.feedback == null" 
                     type="button" class="btn btn-info" 
                     (click)="goToCreateFeedback(row)">
                     Feedback
