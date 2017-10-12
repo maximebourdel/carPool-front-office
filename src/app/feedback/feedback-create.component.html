@@ -12,9 +12,9 @@
 
 <br />
 
-<div class="panel panel-info">
+<div *ngIf="isReservationOk==true" class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title">Effectuer un feedback</h3>
+        <h3 class="panel-title">Effectuer votre feedback pour la reservation du {{ reservation.date_debut | amDateFormat: 'YYYY/MM/DD'}} au {{ reservation.date_fin | amDateFormat: 'YYYY/MM/DD'}}</h3>
     </div>
     <div  class="panel-body">
         
@@ -26,9 +26,10 @@
                 <label for="kilometres"class="col-md-12 col-xs-12" >
                     Kilométrages du véhicule au compteur
                 </label>
-                <input type="number" min="0" class="col-md-2 col-xs-4"
+                <input type="number" min="0" class="col-md-2 col-xs-5"
                     formControlName="kilometres"
                     id="kilometres"
+                    required
                 > km
             </div>        
 
@@ -40,7 +41,6 @@
                     formControlName="commentaires" 
                     id="commentaires"
                 >
-                    Avez vous des remarques à signaler sur votre réservation ?
                 </textarea>
             </div>
             
@@ -56,5 +56,8 @@
     </div>
 </div>
 
+<div *ngIf="isReservationOk==false" >
+    <h3>Vous n'êtes pas autorisé à accéder à cette page</h3>
+</div>
 
 

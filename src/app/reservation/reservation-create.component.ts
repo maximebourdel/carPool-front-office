@@ -42,12 +42,12 @@ export class ReservationCreateComponent implements OnInit {
         this.createForm();
     } 
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
         //Met la navbar reservation-create en active
         document.getElementById('nav-reservation-create').setAttribute('class','active');
     }
 
-    ngOnDestroy(): void { 
+    ngOnDestroy(): void {
         //Met la navbar reservation-create en inactive
         document.getElementById('nav-reservation-create').removeAttribute('class');
     }

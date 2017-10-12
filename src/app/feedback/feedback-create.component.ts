@@ -26,6 +26,7 @@ export class FeedbackCreateComponent {
     errorMessage: string;
     reservation: Reservation;
     feedback: Feedback = new Feedback ();
+    isReservationOk = false;
     feedbackForm: FormGroup;
     busy: Subscription;
 
@@ -40,14 +41,25 @@ export class FeedbackCreateComponent {
     ) {
         //Récupération de la réservation
         this.getReservation();
-        //Initialisation du formulaire
-        this.createForm();
     }
     
     getReservation() {
         this.route.params
-            .switchMap((params: Params) => this.reservationService.getReservation(params['id']))
-            .subscribe(reservation => this.reservation = reservation);
+            .switchMap(
+                (params: Params) => this.reservationService.getReservation(localStorage.getItem('token'), params['id'])
+            )
+            .subscribe(
+                (reservation: Reservation) => {
+                    if (reservation !== undefined ) {
+                        this.reservation = reservation;
+                        //Initialisation du formulaire
+                        this.createForm();
+                        this.isReservationOk=true;
+                    } else {
+                        this.isReservationOk=false;
+                    }
+                }
+            )
     }
 
     addFeedback(): void { 

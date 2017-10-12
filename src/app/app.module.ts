@@ -37,12 +37,22 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { NgxDatatableModule }               from '@swimlane/ngx-datatable';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {BusyModule} from 'angular2-busy';
+import {BrowserAnimationsModule}            from '@angular/platform-browser/animations';
+import { BusyModule, BusyConfig, BUSY_CONFIG_DEFAULTS } from 'angular2-busy';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
 }
+
+//Message pour le busy loading
+const busyConfig: BusyConfig = {
+    message: 'Chargement..',
+    delay: 200,
+    template: BUSY_CONFIG_DEFAULTS.template,
+    minDuration: BUSY_CONFIG_DEFAULTS.minDuration,
+    backdrop: true,
+    wrapperClass: BUSY_CONFIG_DEFAULTS.wrapperClass
+};
 
 @NgModule({
   	declarations: [
@@ -68,7 +78,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
             FlashMessagesModule,
             NgxDatatableModule,
             BrowserAnimationsModule,
-            BusyModule
+            BusyModule.forRoot(busyConfig),
     ],
     providers: [
         {

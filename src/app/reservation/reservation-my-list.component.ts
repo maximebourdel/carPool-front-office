@@ -54,7 +54,7 @@ export class ReservationMyListComponent implements OnInit, OnDestroy {
     }
     
     getMyListReservation() {
-        this.reservationService.getMyListReservation(this.emailUtilisateur)
+        this.reservationService.getMyListReservation(localStorage.getItem('token'))
             .subscribe( (myListReservations) => {
                 this.myListReservations = myListReservations;
                 setTimeout(() => { this.loadingIndicator = false; }, 750);

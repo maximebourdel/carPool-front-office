@@ -7,10 +7,6 @@ import { Observable }   from 'rxjs/Observable';
 
 import { environment }  from '../../environments/environment';
 
-//pour le décryptage du token
-import { JwtHelper }                    from 'angular2-jwt';
-
-
 @Injectable()
 export class ReservationService {
  
@@ -18,8 +14,7 @@ export class ReservationService {
     
            
     constructor (
-        private jwtHelper: JwtHelper
-        ,private authHttp: AuthHttp
+        private authHttp: AuthHttp
     ) {}
  
     getListReservation (): Observable<Reservation[]> {
@@ -30,19 +25,21 @@ export class ReservationService {
                    .map( this.extractData );         
     }
     
-    getReservation (id: number): Observable<Reservation> {
+    getReservation (token: any, id: number): Observable<Reservation> {
         
-        let url = this.baseUrl + 'auth/reservations/';
+        let url = this.baseUrl + 'auth/reservation/get';
 
-        return this.authHttp.get( url + id )
-                    .map( res => this.extractData(res) )        
+        return this.authHttp
+            .post( url, {'token' : token, 'reservation_id': id} )
+            .map( res => this.extractData(res) )
+        ;      
     }
     
-    getMyListReservation (email: string): Observable<Reservation[]> {
+    getMyListReservation (token: any): Observable<Reservation[]> {
         
-        let url = this.baseUrl + 'auth/reservations/mies/lists';
+        let url = this.baseUrl + 'auth/reservation/mylist';
 
-        return this.authHttp.post(url,  email )
+        return this.authHttp.post(url,  token )
                     .map( res => this.extractData(res) )        
     }
     
@@ -56,7 +53,7 @@ export class ReservationService {
 
     putStatutReservation (reservation : Reservation): Observable<Reservation> {
         
-        let url = this.baseUrl + 'admin/reservation/statut';
+        let url = this.baseUrl + 'admin/reservation/changeStatus';
         
         return this.authHttp
             .put( url, {'id':reservation.id,'statut':reservation.statut} )
@@ -76,7 +73,7 @@ export class ReservationService {
             
     getCreneauxByAnneeMois(datesJson: any): Observable<any[]> {
         
-        let url = this.baseUrl + 'auth/reservations/creneauxbyanneemois';
+        let url = this.baseUrl + 'auth/reservation/creneauxbyanneemois';
         
         return this.authHttp
             .post(url, JSON.stringify( datesJson ) )
@@ -86,7 +83,7 @@ export class ReservationService {
 
     createReservation(reservation: Reservation): Observable<Reservation> {
         
-        let url = this.baseUrl + 'auth/reservations';
+        let url = this.baseUrl + 'auth/reservation/create';
         
         return this.authHttp
             .post(url, JSON.stringify( reservation ) )
