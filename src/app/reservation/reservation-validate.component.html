@@ -32,7 +32,7 @@
 
         <ngx-datatable-column name="Date création" [sortable]="false" >
             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                {{ row.date_creation | amDateFormat: 'YYYY/MM/DD HH'}}h
+                {{ row.date_creation | amDateFormat: 'DD/MM/YYYY HH'}}h
             </ng-template>
         </ngx-datatable-column>
         
@@ -44,14 +44,14 @@
 
         <ngx-datatable-column name="Date début résa" [sortable]="false" >
             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                {{ row.date_debut | amDateFormat: 'YYYY/MM/DD'}}
+                {{ row.date_debut | amDateFormat: 'DD/MM/YYYY'}}
             </ng-template>
         </ngx-datatable-column>
 
 
         <ngx-datatable-column name="Date fin résa" [sortable]="false" >
             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                {{ row.date_fin | amDateFormat: 'YYYY/MM/DD'}}
+                {{ row.date_fin | amDateFormat: 'DD/MM/YYYY'}}
             </ng-template>
         </ngx-datatable-column>        
 

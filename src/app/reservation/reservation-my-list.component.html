@@ -98,14 +98,14 @@
 
         <ngx-datatable-column name="Date début" [sortable]="false" >
             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                {{ row.date_debut | amDateFormat: 'YYYY/MM/DD'}}
+                {{ row.date_debut | amDateFormat: 'DD/MM/YYYY'}}
             </ng-template>
         </ngx-datatable-column>
 
 
         <ngx-datatable-column name="Date fin" [sortable]="false" >
             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                {{ row.date_fin | amDateFormat: 'YYYY/MM/DD'}}
+                {{ row.date_fin | amDateFormat: 'DD/MM/YYYY'}}
             </ng-template>
         </ngx-datatable-column>        
 

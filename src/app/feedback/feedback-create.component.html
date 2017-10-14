@@ -14,7 +14,7 @@
 
 <div *ngIf="isReservationOk==true" class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title">Effectuer votre feedback pour la reservation du {{ reservation.date_debut | amDateFormat: 'YYYY/MM/DD'}} au {{ reservation.date_fin | amDateFormat: 'YYYY/MM/DD'}}</h3>
+        <h3 class="panel-title">Effectuer votre feedback pour la réservation du {{ reservation.date_debut | amDateFormat: 'DD/MM/YYYY'}} au {{ reservation.date_fin | amDateFormat: 'DD/MM/YYYY'}}</h3>
     </div>
     <div  class="panel-body">
         
@@ -40,6 +40,7 @@
                 <textarea class="col-md-6 col-xs-12"  
                     formControlName="commentaires" 
                     id="commentaires"
+                    placeholder="Avez-vous rencontré des problèmes divers avec le véhicule ou la réservation ?"
                 >
                 </textarea>
             </div>
