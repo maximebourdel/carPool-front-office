@@ -182,8 +182,6 @@ export class ReservationCreneauxComponent implements OnInit, OnDestroy {
                         if(data.immatriculation == firstImmatriculation ){
                             this.listJours.push(data.jour);
                         }
-                        
-                        console.log(this.listCreneauxByAnneeMois);
                     }
                 }
             );
