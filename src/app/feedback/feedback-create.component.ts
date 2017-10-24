@@ -10,12 +10,14 @@ import { ReservationService }                   from '../reservation/reservation
 import { Feedback }                             from './feedback';
 import { FeedbackService }                      from './feedback.service';
 //Affiche les flashbags
-import { FlashMessagesService }                 from 'angular2-flash-messages';
-//pour le décryptage du token
-import { JwtHelper }                            from 'angular2-jwt';
+import { FlashMessagesService } from 'angular2-flash-messages';
 //Pour l'objet Busy
-import { Subscription } from 'rxjs';
+import { Subscription }         from 'rxjs';
 
+/**
+ * Cette page représente le formulaire pour 
+ * créer un feedback sur une réservation
+ */
 @Component({
     selector: 'feedback-create',
     providers: [ FeedbackService, ReservationService ],
@@ -23,15 +25,34 @@ import { Subscription } from 'rxjs';
 })
 export class FeedbackCreateComponent {
 
-    errorMessage: string;
+    /**
+     * Reservation associée au feedback
+     */
     reservation: Reservation;
+    /**
+     * Représente notre Feedback qui sera enrichi
+     */
     feedback: Feedback = new Feedback ();
-    isReservationOk = false;
+    /**
+     * Boolean étant à faux si réservation n'existe pas ou utilisateur n'est
+     * n'a pas le droit de faire le feedback car n'est pas celui qui a créé la 
+     * réservation (voir service puis API coté symfony)
+     * vrai si l'utilisateur est bien celui qui a créé la reservation
+     */
+    isReservationOk: boolean = false;
+    /**
+     * Représente le formulaire de feedback
+     */
     feedbackForm: FormGroup;
+    /**
+     * Pour le busy (attente)
+     */
     busy: Subscription;
 
+    /**
+     * Constructeur initialisant le FeedbackCreate component
+     */
     constructor (
-        private jwtHelper: JwtHelper,
         private _flashMessagesService: FlashMessagesService,
         private reservationService: ReservationService,
         private feedbackService: FeedbackService,
@@ -43,6 +64,12 @@ export class FeedbackCreateComponent {
         this.getReservation();
     }
     
+    /**
+     * Retourne la réservation liée au feedback en fonction 
+     * du numéro d'identifiant fourni dans l'url
+     * retourne undefined si la réservation n'existe pas ou si 
+     * l'utilisateur n'est pas créateur de la réservation en question
+     */
     getReservation() {
         this.route.params
             .switchMap(
@@ -62,6 +89,11 @@ export class FeedbackCreateComponent {
             )
     }
 
+    /**
+     * Fonction appelée lorsque l'utilisateur appuis sur "Submit"
+     * Va envoyer le feedback au serveur pour l'enregistrer 
+     * puis rediriger l'utilisateur vers sa liste de réservations
+     */
     addFeedback(): void { 
         //On vérifie que le formulaire n'est pas vide
         if (!this.feedbackForm) { return; }
@@ -86,6 +118,9 @@ export class FeedbackCreateComponent {
             )
     }    
     
+    /**
+     * Initialise le formulaire
+     */
     createForm() {
         //initialise les éléments du formulaire
         this.feedbackForm = this.fb.group({ 
@@ -94,7 +129,10 @@ export class FeedbackCreateComponent {
             
         });
     }
-        
+    
+    /**
+     * Redirection vers la page listant les réservations d'un utilisateur
+     */
     gotoListReservation(): void {
         this.router.navigate(['reservation/myList']); 
     }

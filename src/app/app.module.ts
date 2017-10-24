@@ -33,13 +33,18 @@ import { MomentModule }                     from 'angular2-moment';
 
 import { JwtHelper }                        from 'angular2-jwt';
 
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, 
+    LocationStrategy }                      from '@angular/common';
 
 import { NgxDatatableModule }               from '@swimlane/ngx-datatable';
 
 import {BrowserAnimationsModule}            from '@angular/platform-browser/animations';
-import { BusyModule, BusyConfig, BUSY_CONFIG_DEFAULTS } from 'angular2-busy';
+import { BusyModule, BusyConfig, 
+    BUSY_CONFIG_DEFAULTS }                  from 'angular2-busy';
 
+/**
+ * Fonction appelée pour AuthHTTP
+ */
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
 }

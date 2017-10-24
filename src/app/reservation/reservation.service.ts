@@ -7,16 +7,28 @@ import { Observable }   from 'rxjs/Observable';
 
 import { environment }  from '../../environments/environment';
 
+/**
+ * Service gérant les interactions serveurs concernant les Reservations
+ */
 @Injectable()
 export class ReservationService {
  
+    /**
+     * URL permettant d'accéder aux routes de l'api côté serveur
+     */
     baseUrl: string = 'http://' + environment.API_PATH;
     
-           
+    /**
+     * Constructeur initialisant le service Reservation
+     */
     constructor (
         private authHttp: AuthHttp
     ) {}
- 
+
+    /**
+     * Retourne la liste complète des Réservation
+     * @return {Observable<Reservation[]>} Observable listant les Réservations
+     */
     getListReservation (): Observable<Reservation[]> {
         
         let url = this.baseUrl + 'admin/reservation/all';
@@ -25,6 +37,10 @@ export class ReservationService {
                    .map( this.extractData );         
     }
     
+    /**
+     * Retourne une Réservation
+     * @return {Observable<Reservation>} Observable contenant la Réservation
+     */
     getReservation (token: any, id: number): Observable<Reservation> {
         
         let url = this.baseUrl + 'auth/reservation/get';
@@ -35,6 +51,11 @@ export class ReservationService {
         ;      
     }
     
+    /**
+     * Retourne la liste complète des Réservation pour un utilisateur
+     * @return {Observable<Reservation[]>} Observable listant les Réservations
+     * pour un utilisateur
+     */
     getMyListReservation (token: any): Observable<Reservation[]> {
         
         let url = this.baseUrl + 'auth/reservation/mylist';
@@ -42,15 +63,12 @@ export class ReservationService {
         return this.authHttp.post(url,  token )
                     .map( res => this.extractData(res) )        
     }
-    
-    getSumdaybydayReservation (): Observable<any[]> {
-        
-        let url = this.baseUrl + 'auth/reservation/sumdaybyday';
 
-        return this.authHttp.get(url)
-                   .map( this.extractData );         
-    }
-
+    /**
+     * Permet de changer le statut d'une réservation (nécessite id et statut)
+     * @param reservation réservation avec le statut à jours
+     * @return {Observable<Reservation>} Observable contenant la Réservation
+     */
     putStatutReservation (reservation : Reservation): Observable<Reservation> {
         
         let url = this.baseUrl + 'admin/reservation/changeStatus';
@@ -61,6 +79,12 @@ export class ReservationService {
         ;
     }
     
+    /**
+     * Permet d'annuler une réservation en changeant son statut 
+     * (nécessite id et statut)
+     * @param reservation réservation avec le statut à jours
+     * @return {Observable<Reservation>} Observable contenant la Réservation
+     */
     cancelReservation (reservation : Reservation): Observable<Reservation> {
         
         let url = this.baseUrl + 'auth/reservation/cancel';
@@ -70,7 +94,22 @@ export class ReservationService {
             .map( res => this.extractData(res) )
         ;
     }
-            
+    
+    /**
+     * Retourne la une liste de jours sur un mois,
+     * contenant l'info pour savoir si le véhicule est réservé ou non
+     * si il est réservé, donne le nom/prénom du réservant 
+     * tout en donnant la ville du véhicule et son immatriculation
+     * @return {Observable<any[]>} Observable 
+     * @example {
+     *  immatriculation : DL 396 KP
+     *  jour : 1
+     *  is_reserve : 0
+     *  nom : 
+     *  prenom : 
+     *  ville : Niort
+     * }
+     */
     getCreneauxByAnneeMois(datesJson: any): Observable<any[]> {
         
         let url = this.baseUrl + 'auth/reservation/creneauxbyanneemois';
@@ -81,6 +120,11 @@ export class ReservationService {
         ;
     }
 
+    /**
+     * Permet créer une nouvelle réservation
+     * @param reservation La nouvelle réservation à créer
+     * @return {Observable<Reservation>} Observable contenant la Réservation
+     */
     createReservation(reservation: Reservation): Observable<Reservation> {
         
         let url = this.baseUrl + 'auth/reservation/create';
@@ -91,6 +135,11 @@ export class ReservationService {
         ;
     } 
 
+    /**
+     * Extrait les données de l'objet Response
+     * @param res Réponse
+     * @return Retourne en json la response ou {} si null
+     */
     private extractData(res: Response) {
         let body = res.json();
         return body || { };

@@ -28,7 +28,7 @@
         [rowClass]="getRowClass"
     >
     
-        <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow >
+        <ngx-datatable-row-detail [rowHeight]="40" #myDetailRow >
               
             <ng-template let-row="row" let-expanded="expanded" class="col-md-12 col-xs-12" ngx-datatable-row-detail-template>
 
@@ -58,16 +58,21 @@
                         </div>
                     </div>
 
-                    <div *ngIf="row.statut == 'Terminée'" class="progress">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 33.33%">
-                            <span class="sr-only"></span>En cours d'administration
+                    <div *ngIf="row.statut == 'Terminée'" >
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 33.33%">
+                                <span class="sr-only"></span>En cours d'administration
+                            </div>
+                            <div class="progress-bar progress-bar-default progress-bar-striped" style="width: 33.33%">
+                                <span class="sr-only"></span>Confirmée
+                            </div>
+                            <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: 33.34%">
+                                <span class="sr-only"></span>Terminée
+                            </div>
                         </div>
-                        <div class="progress-bar progress-bar-default progress-bar-striped" style="width: 33.33%">
-                            <span class="sr-only"></span>Confirmée
-                        </div>
-                        <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: 33.34%">
-                            <span class="sr-only"></span>Terminée
-                        </div>
+                        <div><strong>Kilometres : </strong> </div>
+                        <div><strong>Commentaire : </strong></div>
+                        <div>{{row}}</div>
                     </div>
 
                 </div>

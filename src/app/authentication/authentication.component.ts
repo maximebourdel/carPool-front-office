@@ -6,9 +6,12 @@ import { FormGroup, FormBuilder , Validators}   from '@angular/forms';
 import { Router, ActivatedRoute }               from '@angular/router';
  
 import { AuthenticationService }                from './authentication.service';
-//Pour le Busy
+//Pour le Busy (attente)
 import { Subscription }                         from 'rxjs';
 
+/**
+ * Représente la page d'authentification
+ */
 @Component({
   selector: 'app-authentication',
   providers: [AuthenticationService],
@@ -16,12 +19,27 @@ import { Subscription }                         from 'rxjs';
 })
 export class AuthenticationComponent {
 	
+    /**
+     * Représente la page qu'on avait avant redirection vers login 
+     * (permet d'y revenir après bonne authentification)
+     */
     returnUrl: string;
+    /**
+     * Variable représentant le formulaire d'authentification
+     */
     loginForm: FormGroup;
+    /**
+     * Pour le busy (attente)
+     */
     busy: Subscription;
+    /**
+     * Message d'erreur du formulaire
+     */
     error: string = '';
     
- 
+    /**
+     * Constructeur de la pgae d'authentification
+     */
     constructor( 
         private authenticationService: AuthenticationService, 
         private router: Router,
@@ -33,7 +51,10 @@ export class AuthenticationComponent {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
  
-    onSubmit() {
+    /**
+     * Fonction renvoyant au serveur les informations entrées par l'utilisateur (login/mdp)
+     */
+    onSubmit(): void {
         this.busy = this.authenticationService
                 .authenticate(this.loginForm.value)
                 .subscribe(
@@ -45,12 +66,13 @@ export class AuthenticationComponent {
         );
     }
     
-    createForm() {
-        //initialise les éléments du formulaire
+    /**
+     * Initialise les éléments du formulaire
+     */
+    createForm(): void {
         this.loginForm = this.fb.group({ 
             'username': ['', Validators.required],
             'password': ['', Validators.required]
-
         });    
     }
 

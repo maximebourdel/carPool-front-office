@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
  
 import { AuthenticationService } from './authentication/authentication.service';
  
 import { JwtHelper } from 'angular2-jwt';
 
+/**
+ * Classe Principale, tous les component pointent vers elle
+ */
 @Component({
   selector: 'app-root',
   providers: [ AuthenticationService ],
@@ -12,16 +14,27 @@ import { JwtHelper } from 'angular2-jwt';
 })
 export class AppComponent {
     
-    
+    /**
+     * URL du logo affiché en gros sur la page
+     */
     imageLogo: string = './assets/logo.png';
+    /**
+     * Représente le nom de l'utilisateur (Récupéré dans l'objet Réservation)
+     */
     nomUtilisateur:string;
+    /**
+     * Représente le prénom de l'utilisateur (Récupéré dans l'objet Réservation)
+     */
     prenomUtilisateur: string;
 
+    /**
+     * Constructeur du component App
+     */
     constructor(
         private jwtHelper: JwtHelper,
         private authenticationService: AuthenticationService
-        , private router: Router
     ) {
+        //Si l'utilisateur est logué
         if (this.hasAuthTokenValid()){
             let userAttributes = this.jwtHelper.decodeToken(localStorage.getItem('token'));
             this.nomUtilisateur = userAttributes['nom'];
@@ -30,15 +43,26 @@ export class AppComponent {
     
     }
  
-    hasAuthTokenValid() {
+    /**
+     * Voit il y a présence d'un token (vérifie si token expiré)
+     * @returns {boolean} vrai ou faux
+     */
+    hasAuthTokenValid() : boolean {
         return localStorage.getItem('token') !== null && this.authenticationService.loggedIn() ;
     }
  
-    logout() {
+    /**
+     * Enlève les payloads du local storage
+     */
+    logout() :void {
         this.authenticationService.logout(); 
     }
     
-    isAdmin() {
+    /**
+     * Voit si on bien à faire à un admin est logué ou non
+     * @returns {boolean} vrai ou faux
+     */
+    isAdmin() : boolean {
         if(this.hasAuthTokenValid()){
             var userAttributes = this.jwtHelper.decodeToken(localStorage.getItem('token'));
             
