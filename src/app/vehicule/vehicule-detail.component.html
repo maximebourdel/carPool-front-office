@@ -1,3 +1,13 @@
+<div>
+    <button type="button" class="btn btn-default" 
+        (click)="redirect.gotoListVehicule()">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Retour à la liste
+    </button>
+</div>
+
+<br />
+
 <div *ngIf="vehicule!==undefined" class="panel panel-default">
     <div class="panel-heading">
         <h1 class="panel-title">{{ vehicule.immatriculation }} - {{ vehicule.marque }}</h1>

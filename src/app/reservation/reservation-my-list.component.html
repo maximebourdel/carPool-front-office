@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-success" (click)="gotoCreate()">
+<button type="button" class="btn btn-success" (click)="redirect.gotoCreateReservation()">
     <i class="fa fa-plus" aria-hidden="true"></i>
         Effectuer une réservation 
 </button>
@@ -137,7 +137,7 @@
                 </button>
                 <button *ngIf="row.statut == 'Confirmée' && row.is_feedbackable == 1 && row.feedback == null" 
                     type="button" class="btn btn-info" 
-                    (click)="goToCreateFeedback(row)">
+                    (click)="redirect.gotoCreateFeedback(row)">
                     Feedback
                 </button>
 

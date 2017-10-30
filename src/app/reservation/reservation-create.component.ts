@@ -15,6 +15,8 @@ import { FlashMessagesService }                 from 'angular2-flash-messages';
 import { JwtHelper }                            from 'angular2-jwt';
 //Pour l'objet Busy
 import { Subscription }                         from 'rxjs';
+//Classe utilisée pour la redirection
+import { Redirect }                             from '../tools/redirect';
 
 /**
  * Cette page représente le formulaire pour effectuer une demande pour une
@@ -52,7 +54,10 @@ export class ReservationCreateComponent implements OnInit {
      * Pour le busy (attente)
      */
     busy: Subscription;
-
+    /**
+     * Variable pour les redirections sur une autre page
+     */
+    redirect: Redirect;
     /**
      * Constructeur initialisant le ReservationCreate component
      */
@@ -64,6 +69,8 @@ export class ReservationCreateComponent implements OnInit {
         private router: Router,
         private fb: FormBuilder
     ) {
+        //Attribution du routeur à la classe de redirection
+        this.redirect = new Redirect(this.router);
         //Initialisation du formulaire
         this.createForm();
     } 
@@ -133,7 +140,7 @@ export class ReservationCreateComponent implements OnInit {
             .subscribe(
                 () => {
                     //Redirection vers la page des réservations
-                    this.gotoListReservation();
+                    this.redirect.gotoMyListReservation();
                     //Message flash
                     this._flashMessagesService.show(
                         "Réservation en cours d'administration !"
@@ -195,12 +202,5 @@ export class ReservationCreateComponent implements OnInit {
                 , value.ville
             )
         );        
-    }
-        
-    /**
-     * Redirection vers la page listant les réservations d'un utilisateur
-     */
-    gotoListReservation(): void {
-        this.router.navigate(['reservation/myList']); 
     }
 }

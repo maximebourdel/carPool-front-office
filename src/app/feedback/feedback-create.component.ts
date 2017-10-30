@@ -1,4 +1,4 @@
-import { Component }                            from '@angular/core';
+import { Component, OnInit }                    from '@angular/core';
 //Pour gérer les redirections
 import { ActivatedRoute, Router , Params }      from '@angular/router';
 //Gestion des formulaires
@@ -10,9 +10,11 @@ import { ReservationService }                   from '../reservation/reservation
 import { Feedback }                             from './feedback';
 import { FeedbackService }                      from './feedback.service';
 //Affiche les flashbags
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { FlashMessagesService }                 from 'angular2-flash-messages';
 //Pour l'objet Busy
-import { Subscription }         from 'rxjs';
+import { Subscription }                         from 'rxjs';
+//Classe utilisée pour la redirection
+import { Redirect }                             from '../tools/redirect';
 
 /**
  * Cette page représente le formulaire pour 
@@ -23,7 +25,7 @@ import { Subscription }         from 'rxjs';
     providers: [ FeedbackService, ReservationService ],
     templateUrl: 'feedback-create.component.html'
 })
-export class FeedbackCreateComponent {
+export class FeedbackCreateComponent implements OnInit {
 
     /**
      * Reservation associée au feedback
@@ -48,6 +50,10 @@ export class FeedbackCreateComponent {
      * Pour le busy (attente)
      */
     busy: Subscription;
+    /**
+     * Variable pour les redirections sur une autre page
+     */
+    redirect: Redirect;
 
     /**
      * Constructeur initialisant le FeedbackCreate component
@@ -60,6 +66,14 @@ export class FeedbackCreateComponent {
         private route: ActivatedRoute,
         private fb: FormBuilder
     ) {
+        //Attribution du routeur à la classe de redirection
+        this.redirect = new Redirect(this.router);
+    }
+    
+    /**
+     * Actions appelées après le constructeur à l'initialisation du Component
+     */
+    ngOnInit() {
         //Récupération de la réservation
         this.getReservation();
     }
@@ -108,7 +122,7 @@ export class FeedbackCreateComponent {
             .subscribe(
                 () => {
                     //Redirection vers la page des réservations
-                    this.gotoListReservation();
+                    this.redirect.gotoMyListReservation();
                     //Message flash
                     this._flashMessagesService.show(
                         "Merci, votre retour a bien été transmis à nos administrateurs !"
@@ -128,12 +142,5 @@ export class FeedbackCreateComponent {
             , commentaires: ['']
             
         });
-    }
-    
-    /**
-     * Redirection vers la page listant les réservations d'un utilisateur
-     */
-    gotoListReservation(): void {
-        this.router.navigate(['reservation/myList']); 
     }
 }

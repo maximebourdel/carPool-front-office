@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+//Classe utilisée pour la redirection
 import { Router }                       from '@angular/router';
- 
+import { Redirect }                     from '../tools/redirect'; 
+
 import { Vehicule }                     from './vehicule';
 import { VehiculeService }              from './vehicule.service';
 
@@ -23,6 +25,10 @@ export class VehiculeListComponent implements OnInit, OnDestroy {
      * Représente la liste des véhicules
      */
     listVehicule: Vehicule[];
+    /**
+     * Variable pour les redirections sur une autre page
+     */
+    redirect: Redirect;
 
     /**
      * Constructeur initialisant un VehiculeList component 
@@ -30,7 +36,10 @@ export class VehiculeListComponent implements OnInit, OnDestroy {
     constructor (
         private vehiculeService: VehiculeService,
         private router: Router,
-    ) {}
+    ) {
+        //Attribution du routeur à la classe de redirection
+        this.redirect = new Redirect(this.router);
+    }
 
     /**
      * Actions appelées après le constructeur à l'initialisation du Component
@@ -59,13 +68,4 @@ export class VehiculeListComponent implements OnInit, OnDestroy {
                 error =>  this.errorMessage = <any>error,
             );
     }
-
-    /**
-     * Redirection vers la page de détail du véhicule (via son id)
-     * @param vehicule Représente le véhicule sélectionné
-     */
-    goToDetail(vehicule: Vehicule): void {
-        this.router.navigate(['vehicule/'+ vehicule.id]);
-    }
-
 }

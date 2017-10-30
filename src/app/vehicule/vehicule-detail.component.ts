@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
-import { ActivatedRoute, Params }       from '@angular/router';
- 
-import { Vehicule }                     from './vehicule';
-import { VehiculeService }              from './vehicule.service';
+import { Component, OnInit, OnDestroy }     from '@angular/core';
+//Pour gérer les redirections
+import { Router, ActivatedRoute, Params }   from '@angular/router';
+ //Import des Classes Véhicule
+import { Vehicule }                         from './vehicule';
+import { VehiculeService }                  from './vehicule.service';
+//Classe utilisée pour la redirection
+import { Redirect }                         from '../tools/redirect';
 
 /**
  * Initialise la vue pour le détail d'un véhicule
@@ -23,6 +25,10 @@ export class VehiculeDetailComponent implements OnInit, OnDestroy {
      * Véhicule retourné par le service
      */
     vehicule: Vehicule;
+    /**
+     * Variable pour les redirections sur une autre page
+     */
+    redirect: Redirect;
     
     /**
      * Constructeur initialisant le VehiculeDetail
@@ -30,7 +36,11 @@ export class VehiculeDetailComponent implements OnInit, OnDestroy {
     constructor (
         private vehiculeService: VehiculeService,
         private route: ActivatedRoute,
-    ) {}
+        private router: Router
+    ) {
+        //Attribution du routeur à la classe de redirection
+        this.redirect = new Redirect(this.router);
+    }
 
     /**
      * Actions appelées après le constructeur à l'initialisation du Component

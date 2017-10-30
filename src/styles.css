@@ -1,3 +1,7 @@
+.clickable {
+    cursor: pointer;
+}
+
 /*  Style pour les formulaires */
 .ng-valid[required]
 , .ng-valid.required  {

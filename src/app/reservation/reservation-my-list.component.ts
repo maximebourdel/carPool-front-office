@@ -11,6 +11,8 @@ import { ReservationService }           from './reservation.service';
 import { FlashMessagesService }         from 'angular2-flash-messages';
 //Pour le décryptage du token
 import { JwtHelper }                    from 'angular2-jwt';
+//Classe utilisée pour la redirection
+import {Redirect}                       from '../tools/redirect';
 
 /**
  * Cette page représente la liste des réservations associées
@@ -23,6 +25,7 @@ import { JwtHelper }                    from 'angular2-jwt';
     encapsulation: ViewEncapsulation.None
 })
 export class ReservationMyListComponent implements OnInit, OnDestroy {
+    
     
     /**
      * Représente l'élément contenu dans ngx-datatable
@@ -52,6 +55,10 @@ export class ReservationMyListComponent implements OnInit, OnDestroy {
      * Représente l'mail de l'utilisateur (Récupéré dans l'objet Réservation)
      */
     emailUtilisateur = this.userAttributes['username'];
+    /**
+     * Variable pour les redirections sur une autre page
+     */
+    redirect: Redirect;
 
     /**
      * Constructeur initialisant le ReservationMyList component
@@ -61,7 +68,10 @@ export class ReservationMyListComponent implements OnInit, OnDestroy {
         private reservationService: ReservationService,
         private router: Router,
         private _flashMessagesService: FlashMessagesService,  
-    ) {}
+    ) {
+        //Attribution du routeur à la classe de redirection
+        this.redirect = new Redirect(this.router);
+    }
     
     /**
      * Actions appelées après le constructeur à l'initialisation du Component
@@ -78,6 +88,7 @@ export class ReservationMyListComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         //Met la navbar nav-liste-reservation en inactive
         document.getElementById('nav-my-liste-reservation').removeAttribute('class');
+        this.redirect = null;
     }
     
     /**
@@ -153,19 +164,4 @@ export class ReservationMyListComponent implements OnInit, OnDestroy {
         if (propA.immatriculation.toLowerCase() > propB.immatriculation.toLowerCase()) 
             return 1;
     }
-    
-    /**
-     * Redirection vers la page de création d'une réservation
-     */
-    gotoCreate(): void {
-        this.router.navigate(['reservation/new']);
-    }
-    
-    /**
-     * Redirection vers la page de création d'un feedback d'une réservation
-     */
-    goToCreateFeedback(reservation: Reservation): void {
-        this.router.navigate(['reservation/feedback/' + reservation.id]);
-    }
-
 }

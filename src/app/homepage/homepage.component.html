@@ -11,7 +11,7 @@
         <div class="col-md-4">        
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a [routerLink]="['reservation/creneaux']">
+                    <a class='clickable' (click)="redirect.gotoCreneaux()" >
                         <div class="row">
                             <div class="col-xs-4">     
                                 <i class="fa fa-calendar fa-5x"></i>
@@ -29,7 +29,9 @@
         <div class="col-md-4">        
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <a [routerLink]="['reservation/new']">
+                    <a class='clickable' 
+                       (click)="redirect.gotoCreateReservation()"
+                    >
                         <div class="row">
                             <div class="col-xs-4">     
                                 <i class="fa fa-calendar-plus-o fa-5x"></i>
@@ -47,7 +49,9 @@
         <div class="col-md-4">        
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a [routerLink]="['reservation/myList']">
+                    <a class='clickable' 
+                       (click)="redirect.gotoMyListReservation()"
+                    >
                         <div class="row">
                             <div class="col-xs-4">     
                                 <i class="fa fa-road fa-5x"></i>
@@ -65,7 +69,9 @@
         <div *ngIf="isAdmin()" class="col-md-4">        
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <a [routerLink]="['reservation/administration']">
+                    <a class='clickable'
+                       (click)="redirect.gotoAdministrationReservation()"
+                    >
                         <div class="row">
                             <div class="col-xs-4">     
                                 <i class="fa fa-key fa-5x"></i>
@@ -80,23 +86,7 @@
             </div>
         </div>
         
-        <div *ngIf="isAdmin()" class="col-md-4">        
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <a [routerLink]="['vehicule']">
-                        <div class="row">
-                            <div class="col-xs-4">     
-                                <i class="fa fa-car fa-5x"></i> 
-                            </div>
-                            <br />
-                            <div class="col-xs-8">     
-                                <h4>Liste des véhicules</h4>
-                            </div> 
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+       
          
     </div><!-- /.container-fluid -->
     

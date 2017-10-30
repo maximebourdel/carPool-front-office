@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
+//Pour gérer les redirections
+import { Router }                       from '@angular/router';
+import { Redirect }                     from '../tools/redirect';
+//Service authentification pour les sécurités
+import { AuthenticationService }        from '../authentication/authentication.service';
 //pour le décryptage du token
 import { JwtHelper }                    from 'angular2-jwt';
-
-import { AuthenticationService }        from '../authentication/authentication.service';
 
 /**
  * Représente la page d'accueil du site
@@ -16,12 +18,21 @@ import { AuthenticationService }        from '../authentication/authentication.s
 export class HomepageComponent implements OnInit, OnDestroy {
     
     /**
+     * Variable pour les redirections sur une autre page
+     */
+    redirect: Redirect;
+    
+    /**
      * Constructeur initialisant le Homepage
      */
     constructor (
         private jwtHelper: JwtHelper,
-        private authenticationService: AuthenticationService
-    ) {} 
+        private authenticationService: AuthenticationService,
+        private router: Router,
+    ) {
+        //Attribution du routeur à la classe de redirection
+        this.redirect = new Redirect(this.router);
+    } 
     
     /**
      * Actions appelées après le constructeur à l'initialisation du Component

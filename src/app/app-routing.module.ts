@@ -15,7 +15,6 @@ import { ReservationValidateComponent } from './reservation/reservation-validate
 
 import { FeedbackCreateComponent }      from './feedback/feedback-create.component';
 
-
 const routes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'login', component: AuthenticationComponent},
@@ -32,7 +31,6 @@ const routes: Routes = [
 
     //Pour les feedbacks
     { path: 'reservation/feedback/:id', component: FeedbackCreateComponent, canActivate: [AuthGuard] },   
-
 
     //Else
     { path: '**', redirectTo: '' }
